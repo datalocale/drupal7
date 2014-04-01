@@ -1,0 +1,969 @@
+<?php
+/**
+ * The hook_menu
+ *
+ *
+ */
+
+function datavizcalcul_menu(){
+    $items['admin/config/system/datavizcalcul'] = array(
+    'title' => 'Dataviz',
+    'description' => 'Configure dataviz',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('datavizcalcul_admin_settings_form'),
+    'access arguments' => array('administer dataviz'),
+    'file' => 'datavizcalcul.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+    );
+         $items['admin/config/system/datavizcalcul/fichiers'] = array(
+    'title' => t('Files'),
+    'weight' => 0,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    //'type' => MENU_LOCAL_TASK,
+  );
+     $items['admin/config/system/datavizcalcul/colorsandlabels'] = array(
+    'title' => t('Colors and labels pie'),
+     'weight' => 1,
+    'description' => 'Configure dataviz',
+     'page callback' => 'drupal_get_form',
+    'page arguments' => array('datavizcalcul_color_form'),
+    'access arguments' => array('administer dataviz'),
+    'file' => 'datavizcalcul.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+ $items['admin/config/system/datavizcalcul/descriptions'] = array(
+    'title' => t('Description'),
+     'weight' => 1,
+    'description' => 'Configure dataviz',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('datavizcalcul_description_form'),
+    'access arguments' => array('administer dataviz'),
+    'file' => 'datavizcalcul.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+   $items['admin/config/system/datavizcalcul/pieupdatedata'] = array(
+    'title' => t('Pie update data'),
+     'weight' => 1,
+    'description' => 'Configure dataviz',
+    'page callback' => 'datavizcalcul_page_pieupdate',
+    'access arguments' => array('administer dataviz'),
+    'file' => 'datavizcalcul.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+
+
+    $items['admin/config/system/datavizcalcul/labelpersonnages'] = array(
+    'title' => t('Labels personnages'),
+    'description' => 'Configure dataviz',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('datavizcalcul_labelpersonnages_form'),
+    'access arguments' => array('administer dataviz'),
+    'file' => 'datavizcalcul.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    );
+     $items['page_dataviz_calcul'] = array(
+    'title' => 'page_calcul',
+    'page callback' => 'datavizcalcul_page_calcul',
+      'access arguments' => array('administer dataviz'),
+    );
+    return $items;
+}
+
+function datavizcalcul_demo_loc($departement,$min1,$min2,$min3,$min4,$min5,$min6,$min7,$min8,$min9,$max1,$max2,$max3,$max4,$max5,$max6,$max7,$max8,$max9,$valdep){
+    $taux1=$valdep[$departement][1];
+    $valclassdep1=datavizcalcul_valdeclassdedep($min1,$max1,$taux1);
+
+    $taux2=$valdep[$departement][2];
+    $valclassdep2=datavizcalcul_valdeclassdedep($min2,$max2,$taux2);
+
+    $taux3=$valdep[$departement][3];
+    $valclassdep3=datavizcalcul_valdeclassdedep($min3,$max3,$taux3);
+
+    $taux4=$valdep[$departement][4];
+    $valclassdep4=datavizcalcul_valdeclassdedep($min4,$max4,$taux4);
+
+
+    $taux5=$valdep[$departement][5];
+    $valclassdep5=datavizcalcul_valdeclassdedep($min5,$max5,$taux5);
+
+
+    $taux6=$valdep[$departement][6];
+    $valclassdep6=datavizcalcul_valdeclassdedep($min6,$max6,$taux6);
+
+    $taux7=$valdep[$departement][7];
+    $valclassdep7=datavizcalcul_valdeclassdedep($min7,$max7,$taux7);
+
+    $taux8=$valdep[$departement][8];
+    $valclassdep8=datavizcalcul_valdeclassdedep($min8,$max8,$taux8);
+
+    $taux9=$valdep[$departement][9];
+    $valclassdep9=datavizcalcul_valdeclassdedep($min9,$max9,$taux9);
+
+    $part_elec1 =$valclassdep1+$valclassdep2+$valclassdep3+$valclassdep4+$valclassdep5+$valclassdep6+$valclassdep7;
+    $part_elec=$part_elec1/7;
+
+    $demo_loc1=floatval($part_elec)+floatval($valclassdep8)+floatval($valclassdep9);
+    $demo_loc=$demo_loc1/3;
+    $arrayvaleurspersonnage=array("part_elec"=>$part_elec,"insc_elect"=>$valclassdep8,"part_init_pub"=>$valclassdep9);
+    $serialarrayvaleurspersonnage=  serialize($arrayvaleurspersonnage);
+
+    $toinsertrecord=array('id_formule'=>'demo_loc','valeur_formule'=>$demo_loc,'valeurs_personnages'=>$serialarrayvaleurspersonnage,'id_departement'=>$departement);
+
+    db_merge('dataviz_calcul')
+  ->key(array('id_formule' => 'demo_loc','id_departement'=>$departement))
+  ->fields($toinsertrecord)
+  ->execute();
+
+
+   // drupal_write_record('dataviz_calcul',$toinsertrecord);
+    return $demo_loc;
+}
+
+function datavizcalcul_cito_droi_civ($departement,$min1,$min2,$min3,$min4,$min5,$min6,$min7,$max1,$max2,$max3,$max4,$max5,$max6,$max7,$valdep){
+
+   $taux1=$valdep[$departement][1];
+   $valclassdep1=datavizcalcul_valdeclassdedep($min1,$max1,$taux1);
+
+    $taux2=$valdep[$departement][2];
+    $valclassdep2=datavizcalcul_valdeclassdedep($min2,$max2,$taux2);
+
+    $taux3=$valdep[$departement][3];
+    $valclassdep3=datavizcalcul_valdeclassdedep($min3,$max3,$taux3);
+
+    $taux4=$valdep[$departement][4];
+    $valclassdep4=datavizcalcul_valdeclassdedep($min4,$max4,$taux4);
+
+    //decroissant il faut alors que min=max et max=min et pour le bon calcul dans datavizcalcul_valdeclassdedep on passe un argument en extra pour bien mettre les conditions
+    $taux5=$valdep[$departement][5];
+    $valclassdep5=datavizcalcul_valdeclassdedep($max5,$min5,$taux5,"valdem");
+
+    $taux6=$valdep[$departement][6];
+    $valclassdep6=datavizcalcul_valdeclassdedep($min6,$max6,$taux6);
+
+   //decroissant il faut alors que min=max et max=min et pour le bon calcul dans datavizcalcul_valdeclassdedep on passe un argument en extra pour bien mettre les conditions
+    $taux7=$valdep[$departement][7];
+    $valclassdep7=datavizcalcul_valdeclassdedep($max7,$min7,$taux7,"valdem");
+
+    $eng_loc1=  floatval($valclassdep1)+floatval($valclassdep2)+floatval($valclassdep3);
+    $eng_loc= $eng_loc1/3;
+    $par1=$valclassdep6+$valclassdep7;
+    $par=$par1/2;
+    $cito_droi_civ1=$eng_loc+$valclassdep4+$valclassdep5+$par;
+    $cito_droi_civ=$cito_droi_civ1/4;
+    $arrayvaleurspersonnage=array("eng_loc"=>$eng_loc,"synd"=>$valclassdep4,"resp_droi_lutte"=>$valclassdep5,"par"=>$par);
+    $serialarrayvaleurspersonnage=  serialize($arrayvaleurspersonnage);
+    $toinsertrecord=array('id_formule'=>'cito_droi_civ','valeur_formule'=>$cito_droi_civ,'valeurs_personnages'=>$serialarrayvaleurspersonnage,'id_departement'=>$departement);
+    //drupal_write_record('dataviz_calcul',$toinsertrecord);
+
+    db_merge('dataviz_calcul')
+  ->key(array('id_formule' => 'cito_droi_civ','id_departement'=>$departement))
+  ->fields($toinsertrecord)
+  ->execute();
+
+
+    return $cito_droi_civ;
+    }
+
+function datavizcalcul_proj_ter($departement,$min1,$min2,$min3,$min4,$min5,$min6,$max1,$max2,$max3,$max4,$max5,$max6,$valdep){
+    $taux1=$valdep[$departement][1];
+    $valclassdep1=datavizcalcul_valdeclassdedep($min1,$max1,$taux1);
+
+    $taux2=$valdep[$departement][2];
+    $valclassdep2=datavizcalcul_valdeclassdedep($min2,$max2,$taux2);
+
+    $taux3=$valdep[$departement][3];
+    $valclassdep3=datavizcalcul_valdeclassdedep($min3,$max3,$taux3);
+
+    $taux4=$valdep[$departement][4];
+    $valclassdep4=datavizcalcul_valdeclassdedep($min4,$max4,$taux4);
+
+    $taux5=$valdep[$departement][5];
+    $valclassdep5=datavizcalcul_valdeclassdedep($min5,$max5,$taux5);
+
+    $taux6=$valdep[$departement][6];
+    $valclassdep6=datavizcalcul_valdeclassdedep($min6,$max6,$taux6);
+
+    $agenda_211=  floatval($valclassdep1)+floatval($valclassdep2);
+    $agenda_21= $agenda_211/2;
+    $renf_coop_sol_terr1=floatval($valclassdep4)+floatval($valclassdep5)+floatval($valclassdep6);
+    $renf_coop_sol_terr=$renf_coop_sol_terr1/3;
+    $proj_ter1=$agenda_21+floatval($valclassdep3)+$renf_coop_sol_terr;
+    $proj_ter=$proj_ter1/3;
+    $arrayvaleurspersonnage=array("agend_21"=>$agenda_21,"del_pol"=>$valclassdep3,"renf_coop_sol_terr"=>$renf_coop_sol_terr);
+    $serialarrayvaleurspersonnage=  serialize($arrayvaleurspersonnage);
+    $toinsertrecord=array('id_formule'=>'proj_ter','valeur_formule'=>$proj_ter,'valeurs_personnages'=>$serialarrayvaleurspersonnage,'id_departement'=>$departement);
+    //drupal_write_record('dataviz_calcul',$toinsertrecord);
+    db_merge('dataviz_calcul')
+  ->key(array('id_formule' => 'proj_ter','id_departement'=>$departement))
+  ->fields($toinsertrecord)
+  ->execute();
+    return $proj_ter;
+}
+
+function datavizcalcul_admin_serv($departement,$min1,$min2,$min3,$min4,$min5,$min6,$min7,$max1,$max2,$max3,$max4,$max5,$max6,$max7,$valdep){
+    $taux1=$valdep[$departement][1];
+    $valclassdep1=datavizcalcul_valdeclassdedep($min1,$max1,$taux1);
+
+    $taux2=$valdep[$departement][2];
+    $valclassdep2=datavizcalcul_valdeclassdedep($min2,$max2,$taux2);
+
+    $taux3=$valdep[$departement][3];
+    $valclassdep3=datavizcalcul_valdeclassdedep($min3,$max3,$taux3);
+
+    $taux4=$valdep[$departement][4];
+    $valclassdep4=datavizcalcul_valdeclassdedep($min4,$max4,$taux4);
+
+    $taux5=$valdep[$departement][5];
+    $valclassdep5=datavizcalcul_valdeclassdedep($min5,$max5,$taux5);
+
+    $taux6=$valdep[$departement][6];
+    $valclassdep6=datavizcalcul_valdeclassdedep($min6,$max6,$taux6);
+
+    $taux7=$valdep[$departement][7];
+    $valclassdep7=datavizcalcul_valdeclassdedep($min7,$max7,$taux7);
+
+    $int_coll1=  floatval($valclassdep3)+floatval($valclassdep4);
+    $int_coll= $int_coll1/2;
+    $acc_inf_donn1=floatval($valclassdep5)+floatval($valclassdep6);
+    $acc_inf_donn=$acc_inf_donn1/2;
+    $admin_serv1=$valclassdep1+$valclassdep2+$int_coll+$acc_inf_donn+$valclassdep7;
+    $admin_serv=$admin_serv1/5;
+    $arrayvaleurspersonnage=array("dem_qual_serv"=>$valclassdep1,"serv_acc"=>$valclassdep2,"int_coll"=>$int_coll,"acc_inf_donn"=>$acc_inf_donn ,"mar_pub"=>$valclassdep7);
+    $serialarrayvaleurspersonnage=  serialize($arrayvaleurspersonnage);
+    $toinsertrecord=array('id_formule'=>'admin_serv','valeur_formule'=>$admin_serv,'valeurs_personnages'=>$serialarrayvaleurspersonnage,'id_departement'=>$departement);
+   // drupal_write_record('dataviz_calcul',$toinsertrecord);
+     db_merge('dataviz_calcul')
+  ->key(array('id_formule' => 'admin_serv','id_departement'=>$departement))
+  ->fields($toinsertrecord)
+  ->execute();
+    return $admin_serv;
+}
+
+
+function datavizcalcul_mis_cap_pers($departement,$min1,$min2,$max1,$max2,$valdep){
+    $taux1=$valdep[$departement][1];
+    $valclassdep1=datavizcalcul_valdeclassdedep($min1,$max1,$taux1);
+    $taux2=$valdep[$departement][2];
+    $valclassdep2=datavizcalcul_valdeclassdedep($min2,$max2,$taux2);
+    $edu_dev_dur=  floatval($valclassdep1)+floatval($valclassdep2);
+    $mis_cap_pers=$edu_dev_dur/2;
+    $arrayvaleurspersonnage=array("edu_dev_dur"=>$mis_cap_pers);
+    $serialarrayvaleurspersonnage=  serialize($arrayvaleurspersonnage);
+    $toinsertrecord=array('id_formule'=>'mis_cap_pers','valeur_formule'=>$mis_cap_pers,'valeurs_personnages'=>$serialarrayvaleurspersonnage,'id_departement'=>$departement);
+   // drupal_write_record('dataviz_calcul',$toinsertrecord);
+     db_merge('dataviz_calcul')
+  ->key(array('id_formule' => 'mis_cap_pers','id_departement'=>$departement))
+  ->fields($toinsertrecord)
+  ->execute();
+    return $mis_cap_pers;
+}
+
+function datavizcalcul_sect_eco($departement,$min1,$max1,$valdep){
+    $taux1=$valdep[$departement][1];
+    $valclassdep1=datavizcalcul_valdeclassdedep($min1,$max1,$taux1);
+    $eco_soc_sol=  floatval($valclassdep1);
+    $sect_eco=$eco_soc_sol;
+    $arrayvaleurspersonnage=array("eco_soc_sol"=>$eco_soc_sol);
+    $serialarrayvaleurspersonnage=  serialize($arrayvaleurspersonnage);
+    $toinsertrecord=array('id_formule'=>'sect_eco','valeur_formule'=>$sect_eco,'valeurs_personnages'=>$serialarrayvaleurspersonnage,'id_departement'=>$departement);
+   // drupal_write_record('dataviz_calcul',$toinsertrecord);
+     db_merge('dataviz_calcul')
+  ->key(array('id_formule' => 'sect_eco','id_departement'=>$departement))
+  ->fields($toinsertrecord)
+  ->execute();
+    return $sect_eco;
+}
+
+function datavizcalcul_inst_act_part($departement,$min1,$min2,$max1,$max2,$valdep){
+    $taux1=$valdep[$departement][1];
+    $valclassdep1=datavizcalcul_valdeclassdedep($min1,$max1,$taux1);
+
+    $taux2=$valdep[$departement][2];
+    $valclassdep2=datavizcalcul_valdeclassdedep($min2,$max2,$taux2);
+
+    $cons_dev1=  floatval($valclassdep1)+floatval($valclassdep2);
+    $cons_dev= $cons_dev1/2;
+    $arrayvaleurspersonnage=array("cons_dev"=>$cons_dev);
+    $serialarrayvaleurspersonnage=  serialize($arrayvaleurspersonnage);
+    $toinsertrecord=array('id_formule'=>'inst_act_part','valeur_formule'=>$cons_dev,'valeurs_personnages'=>$serialarrayvaleurspersonnage,'id_departement'=>$departement);
+   // drupal_write_record('dataviz_calcul',$toinsertrecord);
+     db_merge('dataviz_calcul')
+  ->key(array('id_formule' => 'inst_act_part','id_departement'=>$departement))
+  ->fields($toinsertrecord)
+  ->execute();
+    return $cons_dev;
+}
+
+
+function datavizcalcul_valdeclassdedep($min,$max,$taux,$val=''){
+    $val_100=$max;
+    $val_0=$min;
+    $maxmin=$max/5-$min/5;
+    $val_80=floatval($max-$maxmin);
+    $val_60=floatval($val_80-$maxmin);
+    $val_40=floatval($val_60-$maxmin);
+    $val_20=floatval($val_40-$maxmin);
+    $taux=  floatval(str_replace(',','.', $taux));
+    if($val=='valdem'){
+        if($taux>=$val_100&&$taux<=$val_80){
+        $bornclassinf=80;
+        $bornclasssup=100;
+        $bornarbinf=$val_80;
+        $bornarbsup=$val_100;
+    }
+    elseif($taux>=$val_80&&$taux<=$val_60){
+        $bornclassinf=60;
+        $bornclasssup=80;
+        $bornarbinf=$val_60;
+        $bornarbsup=$val_80;
+    }
+    elseif($taux>=$val_60&&$taux<=$val_40){
+        $bornclassinf=40;
+        $bornclasssup=60;
+        $bornarbinf=$val_40;
+        $bornarbsup=$val_60;
+    }
+    elseif($taux>=$val_40&&$taux<=$val_20){
+        $bornclassinf=20;
+        $bornclasssup=40;
+        $bornarbinf=$val_20;
+        $bornarbsup=$val_40;
+    }
+    elseif($taux>=$val_20&&$taux<=$val_0){
+        $bornclassinf=0;
+        $bornclasssup=20;
+        $bornarbinf=$val_0;
+        $bornarbsup=$val_20;
+    }
+    }
+    else{
+    if($taux<=$val_100&&$taux>=$val_80){
+        $bornclassinf=80;
+        $bornclasssup=100;
+        $bornarbinf=$val_80;
+        $bornarbsup=$val_100;
+    }
+    elseif($taux<=$val_80&&$taux>=$val_60){
+        $bornclassinf=60;
+        $bornclasssup=80;
+        $bornarbinf=$val_60;
+        $bornarbsup=$val_80;
+    }
+    elseif($taux<=$val_60&&$taux>=$val_40){
+        $bornclassinf=40;
+        $bornclasssup=60;
+        $bornarbinf=$val_40;
+        $bornarbsup=$val_60;
+    }
+    elseif($taux<=$val_40&&$taux>=$val_20){
+        $bornclassinf=20;
+        $bornclasssup=40;
+        $bornarbinf=$val_20;
+        $bornarbsup=$val_40;
+    }
+    elseif($taux<=$val_20&&$taux>=$val_0){
+        $bornclassinf=0;
+        $bornclasssup=20;
+        $bornarbinf=$val_0;
+        $bornarbsup=$val_20;
+    }
+}
+    $parenthese1=$bornclasssup-$bornclassinf;
+    $parenthese2=floatval($taux-$bornarbinf);
+    $parenthese3=$bornarbsup-$bornarbinf;
+    $parenthese=$parenthese1*$parenthese2/$parenthese3;
+    $valclassdep=$bornclassinf+$parenthese;
+    return $valclassdep;
+
+}
+
+function datavizcalcul_page_calcul(){
+    global $base_url;
+    $docroot='/opt/apache2/htdocs/drupal7/';
+    //demo_loc
+    $file1='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_pat_elec_pres_2007');
+    $file2='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_pat_elec_pres_2012');
+    $file3='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_pat_elec_cant_2008');
+    $file4='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_pat_elec_cant_2011');
+    $file5='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_pat_elec_mun_2008');
+    $file6='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_pat_elec_leg_2007');
+    $file7='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_pat_elec_leg_2012');
+    $file8='/sites/default/files/ressources/'.variable_get('datavizcalcul_inscript_electo');
+    $file9='/sites/default/files/ressources/'.variable_get('datavizcalcul_particip_init_publ');
+    if (($handle = fopen($docroot.$file1, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier1[]=$data;
+
+            if($i>=1&&$i<97&&isset($data[2])&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values1[]=$data2;}
+            $i++;
+        }
+        $min1=min($values1);
+        $max1=max($values1);
+        $avg1=array_sum($values1)/count($values1);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file2, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier2[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values2[]=$data2;}
+            $i++;
+        }
+        $min2=min($values2);
+        $max2=max($values2);
+        $avg2=array_sum($values2)/count($values2);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file3, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier3[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values3[]=$data2;}
+            $i++;
+        }
+        $min3=min($values3);
+        $max3=max($values3);
+        $avg3=array_sum($values3)/count($values3);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file4, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier4[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values4[]=$data2;}
+            $i++;
+         }
+        $min4=min($values4);
+        $max4=max($values4);
+        $avg4=array_sum($values4)/count($values4);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file5, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier5[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values5[]=$data2;}
+            $i++;
+         }
+        $min5=min($values5);
+        $max5=max($values5);
+        $avg5=array_sum($values5)/count($values5);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file6, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier6[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values6[]=$data2;}
+            $i++;
+        }
+        $min6=min($values6);
+        $max6=max($values6);
+        $avg6=array_sum($values6)/count($values6);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file7, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier7[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values7[]=$data2;}
+            $i++;
+        }
+        $min7=min($values7);
+        $max7=max($values7);
+        $avg7=array_sum($values7)/count($values7);
+        fclose($handle);
+    }
+if (($handle = fopen($docroot.$file8, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier8[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values8[]=$data2;}
+            $i++;
+        }
+        $min8=min($values8);
+        $max8=max($values8);
+        $avg8=array_sum($values8)/count($values8);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file9, "r")) !== FALSE) {
+        $i=0;
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier9[]=$data;
+            if($i>=1&&$i<97&&$data[2]<>'') {$data2=str_replace(",",".",$data[2]);$values9[]=$data2;}
+            $i++;
+        }
+        $min9=min($values9);
+        $max9=max($values9);
+        $avg9=array_sum($values9)/count($values9);
+        fclose($handle);
+    }
+
+    $valdepavg['moyenne']=array(1=>$avg1,2=>$avg2,3=>$avg3,4=>$avg4,5=>$avg5,6=>$avg6,7=>$avg7,8=>$avg8,9=>$avg9);
+    $demo_locavg=datavizcalcul_demo_loc('moyenne',$min1,$min2,$min3,$min4,$min5,$min6,$min7,$min8,$min9,$max1,$max2,$max3,$max4,$max5,$max6,$max7,$max8,$max9,$valdepavg);
+
+
+        for($i=1;$i<97;$i++ ){
+            $iddep=$fichier1[$i][0];
+            $valdep[$iddep]=array(1=>$fichier1[$i][2],2=>$fichier2[$i][2],3=>$fichier3[$i][2],4=>$fichier4[$i][2],5=>$fichier5[$i][2],6=>$fichier6[$i][2],7=>$fichier7[$i][2],8=>$fichier8[$i][2],9=>$fichier9[$i][2]);
+        }
+ //end demo_loc
+
+//cito_droi_civ
+    $file21='/sites/default/files/ressources/'.variable_get('datavizcalcul_nb_creat_asso_100');
+    $file22='/sites/default/files/ressources/'.variable_get('datavizcalcul_nb_jun_ass_100');
+    $file23='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_don_impo_decl_don_assoc');
+    $file24='/sites/default/files/ressources/'.variable_get('datavizcalcul_taux_part_elect_prud');
+    $file25='/sites/default/files/ressources/'.variable_get('datavizcalcul_nb_saisi_hald');
+    $file26='/sites/default/files/ressources/'.variable_get('datavizcalcul_pat_femm_elu');
+    $file27='/sites/default/files/ressources/'.variable_get('datavizcalcul_ecar_pari_att');
+
+       if (($handle = fopen($docroot.$file21, "r")) !== FALSE) {
+        $i=0;
+        while (($data2 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier21[]=$data2;
+
+            if($i>=1&&$i<97&&$data2[2]<>'') {$data22=str_replace(",",".",$data2[2]);$values21[]=$data22;}
+            $i++;
+        }
+        $min21=min($values21);
+        $max21=max($values21);
+        $avg21=array_sum($values21)/count($values21);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file22, "r")) !== FALSE) {
+        $i=0;
+        while (($data2 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier22[]=$data2;
+            if($i>=1&&$i<97&&$data2[2]<>'') {$data22=str_replace(",",".",$data2[2]);$values22[]=$data22;}
+            $i++;
+        }
+        $min22=min($values22);
+        $max22=max($values22);
+        $avg22=array_sum($values22)/count($values22);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file23, "r")) !== FALSE) {
+        $i=0;
+        while (($data2 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier23[]=$data2;
+            if($i>=1&&$i<97&&$data2[2]<>'') {$data22=str_replace(",",".",$data2[2]);$values23[]=$data22;}
+            $i++;
+        }
+        $min23=min($values23);
+        $max23=max($values23);
+        $avg23=array_sum($values23)/count($values23);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file24, "r")) !== FALSE) {
+        $i=0;
+        while (($data2 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier24[]=$data2;
+            if($i>=1&&$i<97&&$data2[2]<>'') {$data22=str_replace(",",".",$data2[2]);$values24[]=$data22;}
+            $i++;
+         }
+        $min24=min($values24);
+        $max24=max($values24);
+        $avg24=array_sum($values24)/count($values24);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file25, "r")) !== FALSE) {
+        $i=0;
+        while (($data2 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier25[]=$data2;
+            if($i>=1&&$i<97&&$data2[2]<>'') {$data22=str_replace(",",".",$data2[2]);$values25[]=$data22;}
+            $i++;
+         }
+        $min25=min($values25);
+        $max25=max($values25);
+        $avg25=array_sum($values25)/count($values25);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file26, "r")) !== FALSE) {
+        $i=0;
+        while (($data2 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier26[]=$data2;
+            if($i>=1&&$i<97&&$data2[2]<>'') {$data22=str_replace(",",".",$data2[2]);$values26[]=$data22;}
+            $i++;
+        }
+        $min26=min($values26);
+        $max26=max($values26);
+        $avg26=array_sum($values26)/count($values26);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file27, "r")) !== FALSE) {
+        $i=0;
+        while (($data2 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier27[]=$data2;
+            if($i>=1&&$i<97&&$data2[2]<>'') {$data22=str_replace(",",".",$data2[2]); $values27[]=$data22;}
+            $i++;
+        }
+        $min27=min($values27);
+        $max27=max($values27);
+        $avg27=array_sum($values27)/count($values27);
+        fclose($handle);
+    }
+
+    $valdepavg2['moyenne']=array(1=>$avg21,2=>$avg22,3=>$avg23,4=>$avg24,5=>$avg25,6=>$avg26,7=>$avg27);
+    $cito_droi_civavg=datavizcalcul_cito_droi_civ('moyenne',$min21,$min22,$min23,$min24,$min25,$min26,$min27,$max21,$max22,$max23,$max24,$max25,$max26,$max27,$valdepavg2);
+
+
+    for($i=1;$i<97;$i++ ){
+        $iddep=$fichier21[$i][0];
+        $valdep2[$iddep]=array(1=>$fichier21[$i][2],2=>$fichier22[$i][2],3=>$fichier23[$i][2],4=>$fichier24[$i][2],5=>$fichier25[$i][2],6=>$fichier26[$i][2],7=>$fichier27[$i][2]);
+    }
+
+    //end cito_droi_civ
+
+    //inst_act_part
+    $file31='/sites/default/files/ressources/'.variable_get('datavizcalcul_bud_moy_cons_dev');
+    $file32='/sites/default/files/ressources/'.variable_get('datavizcalcul_nb_sal_10_mem');
+    if (($handle = fopen($docroot.$file31, "r")) !== FALSE) {
+        $i=0;
+        while (($data3 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier31[]=$data3;
+
+            if($i>=1&&$i<97&&$data3[2]<>'') {$data32=str_replace(",",".",$data3[2]);$values31[]=$data32;}
+            $i++;
+        }
+        $min31=min($values31);
+        $max31=max($values31);
+        $avg31=array_sum($values31)/count($values31);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file32, "r")) !== FALSE) {
+        $i=0;
+        while (($data3 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier32[]=$data3;
+            if($i>=1&&$i<97&&$data3[2]<>'') {$data32=str_replace(",",".",$data3[2]);$values32[]=$data32;}
+            $i++;
+        }
+        $min32=min($values32);
+        $max32=max($values32);
+        $avg32=array_sum($values32)/count($values32);
+        fclose($handle);
+    }
+
+    $valdepavg3['moyenne']=array(1=>$avg31,2=>$avg32);
+    $inst_act_partavg=datavizcalcul_inst_act_part('moyenne',$min31,$min32,$max31,$max32,$valdepavg3);
+
+
+    for($i=1;$i<97;$i++ ){
+        $iddep=$fichier31[$i][0];
+        $valdep3[$iddep]=array(1=>$fichier31[$i][2],2=>$fichier32[$i][2]);
+    }
+    //end inst_act_part
+
+    //proj_ter
+    $file41='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_coll_eng_Agend');
+    $file42='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_pop_couv_a21');
+    $file43='/sites/default/files/ressources/'.variable_get('datavizcalcul_exist_explic_vice_pres');
+    $file44='/sites/default/files/ressources/'.variable_get('datavizcalcul_coop_inter_part_dep');
+    $file45='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_pop_dep_couv');
+    $file46='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_scott_terr_part');
+    if (($handle = fopen($docroot.$file41, "r")) !== FALSE) {
+        $i=0;
+        while (($data4 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier41[]=$data4;
+            if($i>=1&&$i<97&&$data4[2]<>'') {$data42=str_replace(",",".",$data4[2]);$values41[]=$data42;}
+            $i++;
+        }
+        $min41=min($values41);
+        $max41=max($values41);
+        $avg41=array_sum($values41)/count($values41);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file42, "r")) !== FALSE) {
+        $i=0;
+        while (($data4 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier42[]=$data4;
+            if($i>=1&&$i<97&&$data4[2]<>'') {$data42=str_replace(",",".",$data4[2]);$values42[]=$data42;}
+            $i++;
+        }
+        $min42=min($values42);
+        $max42=max($values42);
+        $avg42=array_sum($values42)/count($values42);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file43, "r")) !== FALSE) {
+        $i=0;
+        while (($data4 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier43[]=$data4;
+            if($i>=1&&$i<97&&$data4[2]<>'') {$data42=str_replace(",",".",$data4[2]);$values43[]=$data42;}
+            $i++;
+        }
+        $min43=min($values43);
+        $max43=max($values43);
+        $avg43=array_sum($values43)/count($values43);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file44, "r")) !== FALSE) {
+        $i=0;
+        while (($data4 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier44[]=$data4;
+            if($i>=1&&$i<97&&$data4[2]<>'') {$data42=str_replace(",",".",$data4[2]);$values44[]=$data42;}
+            $i++;
+         }
+        $min44=min($values44);
+        $max44=max($values44);
+        $avg44=array_sum($values44)/count($values44);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file45, "r")) !== FALSE) {
+        $i=0;
+        while (($data4 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier45[]=$data;
+            if($i>=1&&$i<97&&$data4[2]<>'') {$data42=str_replace(",",".",$data4[2]);$values45[]=$data42;}
+            $i++;
+         }
+        $min45=min($values45);
+        $max45=max($values45);
+        $avg45=array_sum($values45)/count($values45);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file46, "r")) !== FALSE) {
+        $i=0;
+        while (($data4 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier46[]=$data4;
+            if($i>=1&&$i<97&&$data4[2]<>'') {$data42=str_replace(",",".",$data4[2]);$values46[]=$data42;}
+            $i++;
+        }
+        $min46=min($values46);
+        $max46=max($values46);
+        $avg46=array_sum($values46)/count($values46);
+        fclose($handle);
+    }
+
+    $valdepavg4['moyenne']=array(1=>$avg41,2=>$avg42,3=>$avg43,4=>$avg44,5=>$avg45,6=>$avg46);
+    $proj_ter=datavizcalcul_proj_ter('moyenne',$min41,$min42,$min43,$min44,$min45,$min46,$max41,$max42,$max43,$max44,$max45,$max46,$valdepavg4);
+
+
+    for($i=1;$i<97;$i++ ){
+        $iddep=$fichier41[$i][0];
+        $valdep4[$iddep]=array(1=>$fichier41[$i][2],2=>$fichier42[$i][2],3=>$fichier43[$i][2],4=>$fichier44[$i][2],5=>$fichier45[$i][2],6=>$fichier46[$i][2]);
+    }
+    //end proj_ter
+
+    //admin_serv
+    $file51='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_coll_eng_dem_qual');
+    $file52='/sites/default/files/ressources/'.variable_get('datavizcalcul_moy_dep_note_obt');
+    $file53='/sites/default/files/ressources/'.variable_get('datavizcalcul_niv_anim_commu_fac');
+    $file54='/sites/default/files/ressources/'.variable_get('datavizcalcul_class_vill_intern');
+    $file55='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_coll_eng_open_data');
+    $file56='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_delib_coll_acce_port_int');
+    $file57='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_mar_coll');
+    if (($handle = fopen($docroot.$file51, "r")) !== FALSE) {
+        $i=0;
+        while (($data5 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier51[]=$data5;
+            if($i>=1&&$i<97&&$data5[2]<>'') {$data52=str_replace(",",".",$data5[2]);$values51[]=$data52;}
+            $i++;
+        }
+        $min51=min($values51);
+        $max51=max($values51);
+        $avg51=array_sum($values51)/count($values51);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file52, "r")) !== FALSE) {
+        $i=0;
+        while (($data5 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier52[]=$data5;
+            if($i>=1&&$i<97&&$data5[2]<>'') {$data52=str_replace(",",".",$data5[2]);$values52[]=$data52;}
+            $i++;
+        }
+        $min52=min($values52);
+        $max52=max($values52);
+        $avg52=array_sum($values52)/count($values52);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file53, "r")) !== FALSE) {
+        $i=0;
+        while (($data5 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier53[]=$data5;
+            if($i>=1&&$i<97&&$data5[2]<>'') { $data52=str_replace(",",".",$data5[2]);$values53[]=$data52;}
+            $i++;
+        }
+        $min53=min($values53);
+        $max53=max($values53);
+        $avg53=array_sum($values53)/count($values53);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file54, "r")) !== FALSE) {
+        $i=0;
+        while (($data5 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier54[]=$data;
+            if($i>=1&&$i<97&&$data5[2]<>'') {$data52=str_replace(",",".",$data5[2]);$values54[]=$data52;}
+            $i++;
+         }
+        $min54=min($values54);
+        $max54=max($values54);
+        $avg54=array_sum($values54)/count($values54);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file55, "r")) !== FALSE) {
+        $i=0;
+        while (($data5 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier55[]=$data;
+            if($i>=1&&$i<97&&$data5[2]<>'') {$data52=str_replace(",",".",$data5[2]);$values55[]=$data52;}
+            $i++;
+         }
+        $min55=min($values55);
+        $max55=max($values55);
+        $avg55=array_sum($values55)/count($values55);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file56, "r")) !== FALSE) {
+        $i=0;
+        while (($data5 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier56[]=$data;
+            if($i>=1&&$i<97&&$data5[2]<>'') {$data52=str_replace(",",".",$data5[2]);$values56[]=$data52;}
+            $i++;
+        }
+        $min56=min($values56);
+        $max56=max($values56);
+        $avg56=array_sum($values56)/count($values56);
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file57, "r")) !== FALSE) {
+        $i=0;
+        while (($data5 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier57[]=$data5;
+            if($i>=1&&$i<97&&$data5[2]<>'') {$data52=str_replace(",",".",$data5[2]);$values57[]=$data52;}
+            $i++;
+        }
+        $min57=min($values57);
+        $max57=max($values57);
+        $avg57=array_sum($values57)/count($values57);
+        fclose($handle);
+    }
+
+    $valdepavg5['moyenne']=array(1=>$avg51,2=>$avg52,3=>$avg53,4=>$avg54,5=>$avg55,6=>$avg56,7=>$avg57);
+    $admin_servavg=datavizcalcul_admin_serv('moyenne',$min51,$min52,$min53,$min54,$min55,$min56,$min57,$max51,$max52,$max53,$max54,$max55,$max56,$max57,$valdepavg5);
+    for($i=1;$i<97;$i++ ){
+        $iddep=$fichier51[$i][0];
+        $valdep5[$iddep]=array(1=>$fichier51[$i][2],2=>$fichier52[$i][2],3=>$fichier53[$i][2],4=>$fichier54[$i][2],5=>$fichier55[$i][2],6=>$fichier56[$i][2],7=>$fichier57[$i][2]);
+    }
+    //end admin_serv
+
+    //sect eco
+    $file61='/sites/default/files/ressources/'.variable_get('datavizcalcul_poids_econ_soc_empl');
+    if (($handle = fopen($docroot.$file61, "r")) !== FALSE) {
+        $i=0;
+        while (($data6 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier61[]=$data6;
+            if($i>=1&&$i<97&&$data6[2]<>'') {$data62=str_replace(",",".",$data6[2]);$values61[]=$data62;}
+            $i++;
+        }
+        $min61=min($values61);
+        $max61=max($values61);
+        $avg61=array_sum($values61)/count($values61);
+        fclose($handle);
+    }
+   $valdepavg6['moyenne']=array(1=>$avg61);
+   $sect_ecoavg=datavizcalcul_sect_eco('moyenne',$min61,$max61,$valdepavg6);
+   for($i=1;$i<97;$i++ ){
+        $iddep=$fichier61[$i][0];
+        $valdep6[$iddep]=array(1=>$fichier61[$i][2]);
+    }
+    //end sect eco
+
+    // mis_cap_pers
+    $file71='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_ecol_lab');
+    $file72='/sites/default/files/ressources/'.variable_get('datavizcalcul_part_etab_scol_ag21');
+    if (($handle = fopen($docroot.$file71, "r")) !== FALSE) {
+        $i=0;
+        while (($data7 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier71[]=$data7;
+            if($i>=1&&$i<97&&$data7[2]<>'') {$data72=str_replace(",",".",$data7[2]);$values71[]=$data72;}
+            $i++;
+        }
+        $min71=min($values71);
+        $max71=max($values71);
+        $avg71=array_sum($values71)/count($values71);
+
+        fclose($handle);
+    }
+    if (($handle = fopen($docroot.$file72, "r")) !== FALSE) {
+        $i=0;
+        while (($data7 = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $fichier72[]=$data7;
+            if($i>=1&&$i<97&&$data7[2]<>'') {$data72=str_replace(",",".",$data7[2]);$values72[]=$data72;}
+            $i++;
+        }
+        $min72=min($values72);
+        $max72=max($values72);
+        $avg72=array_sum($values72)/count($values72);
+
+        fclose($handle);
+    }
+   $valdepavg7['moyenne']=array(1=>$avg71,2=>$avg72);
+   $mis_cap_persavg=datavizcalcul_mis_cap_pers('moyenne',$min71,$min72,$max71,$max72,$valdepavg7);
+
+   for($i=1;$i<97;$i++ ){
+        $iddep=$fichier71[$i][0];
+        $valdep7[$iddep]=array(1=>$fichier71[$i][2],2=>$fichier72[$i][2]);
+    }
+    //end mis_cap_pers
+
+    $indicegouvernanceavg1=$demo_locavg+$cito_droi_civavg+$inst_act_partavg+$proj_teravg+$admin_servavg+$sect_ecoavg+$mis_cap_persavg;
+    $indicegouvernanceavg=$indicegouvernanceavg1/7;
+    $toinsertrecordavg=array('id_departement'=>'moyenne','valeur'=>$indicegouvernanceavg);
+   // drupal_write_record('dataviz_indice_gouvernance',$toinsertrecordavg);
+    db_merge('dataviz_indice_gouvernance')
+  ->key(array('id_departement'=>'moyenne'))
+  ->fields($toinsertrecordavg)
+  ->execute();
+
+
+
+    $arraydepartements=array("1", "2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","2A","2B","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95");
+    foreach($arraydepartements as $key=>$val){
+        $departement=$val;
+        //demo_loc
+        $demo_loc=datavizcalcul_demo_loc($departement,$min1,$min2,$min3,$min4,$min5,$min6,$min7,$min8,$min9,$max1,$max2,$max3,$max4,$max5,$max6,$max7,$max8,$max9,$valdep);
+        //cito_droi_civ
+        $cito_droi_civ=datavizcalcul_cito_droi_civ($departement,$min21,$min22,$min23,$min24,$min25,$min26,$min27,$max21,$max22,$max23,$max24,$max25,$max26,$max27,$valdep2);
+        // inst_act_part
+        $inst_act_part=datavizcalcul_inst_act_part($departement,$min31,$min32,$max31,$max32,$valdep3);
+        //proj_ter
+        $proj_ter=datavizcalcul_proj_ter($departement,$min41,$min42,$min43,$min44,$min45,$min46,$max41,$max42,$max43,$max44,$max45,$max46,$valdep4);
+        //admin_serv
+        $admin_serv=datavizcalcul_admin_serv($departement,$min51,$min52,$min53,$min54,$min55,$min56,$min57,$max51,$max52,$max53,$max54,$max55,$max56,$max57,$valdep5);
+        //sect echo
+        $sect_eco=datavizcalcul_sect_eco($departement,$min61,$max61,$valdep6);
+        //mis_cap_pers
+        $mis_cap_pers=datavizcalcul_mis_cap_pers($departement,$min71,$min72,$max71,$max72,$valdep7);
+
+        $indicegouvernance1=$demo_loc+$cito_droi_civ+$inst_act_part+$proj_ter+$admin_serv+$sect_eco+$mis_cap_pers;
+        $indicegouvernance=$indicegouvernance1/7;
+
+        $toinsertrecord=array('id_departement'=>$departement,'valeur'=>$indicegouvernance);
+       // drupal_write_record('dataviz_indice_gouvernance',$toinsertrecord);
+        db_merge('dataviz_indice_gouvernance')
+         ->key(array('id_departement'=>$departement))
+         ->fields($toinsertrecord)
+         ->execute();
+    }
+    createjsonfile();
+    global $base_url;
+$destination = drupal_get_destination();
+    drupal_goto($base_url.$destination).drupal_set_message(t("Validated"));
+
+}
+
+function datavizcalcul_permission() {
+  return array(
+    'administer dataviz' => array(
+      'title' => t('administer datavize'),
+      'description' => t('administer dataviz.'),));
+}
+function datavizcalcul_page_pieupdate(){
+	$link=l(t('Update Pie data'),'page_dataviz_calcul',array('query' => array('destination' => 'admin/config/system/datavizcalcul/pieupdatedata')));
+return t("To update the chart data click on this link").$link;
+}
+
+

@@ -1,0 +1,52 @@
+<?php
+/**
+ * hook install
+ *
+ */
+function datavizcalcul_install() {
+
+}
+/**
+ * hook uninstall
+ *
+ */
+function datavizcalcul_uninstall() {
+	variable_del('datavizcalcul_taux_pat_elec_pres_2007');
+	variable_del('datavizcalcul_taux_pat_elec_pres_2012');
+	variable_del('datavizcalcul_taux_pat_elec_cant_2008');
+	variable_del('datavizcalcul_taux_pat_elec_cant_2011');
+	variable_del('datavizcalcul_taux_pat_elec_mun_2008');
+	variable_del('datavizcalcul_taux_pat_elec_leg_2007');
+	variable_del('datavizcalcul_taux_pat_elec_leg_2012');
+	variable_del('datavizcalcul_inscript_electo');
+	variable_del('datavizcalcul_particip_init_publ');
+	variable_del('datavizcalcul_nb_creat_asso_100');
+	variable_del('datavizcalcul_nb_jun_ass_100');
+	variable_del('datavizcalcul_taux_don_impo_decl_don_assoc');
+	variable_del('datavizcalcul_taux_part_elect_prud');
+	variable_del('datavizcalcul_nb_saisi_hald');
+	variable_del('datavizcalcul_pat_femm_elu');
+	variable_del('datavizcalcul_ecar_pari_att');
+	variable_del('datavizcalcul_bud_moy_cons_dev');
+	variable_del('datavizcalcul_nb_sal_10_mem');
+	variable_del('datavizcalcul_part_coll_eng_Agend');
+	variable_del('datavizcalcul_part_pop_couv_a21');
+	variable_del('datavizcalcul_exist_explic_vice_pres');
+	variable_del('datavizcalcul_coop_inter_part_dep');
+	variable_del('datavizcalcul_part_pop_dep_couv');
+	variable_del('datavizcalcul_part_scott_terr_part');
+	variable_del('datavizcalcul_part_coll_eng_dem_qual');
+	variable_del('datavizcalcul_moy_dep_note_obt');
+	variable_del('datavizcalcul_niv_anim_commu_fac');
+	variable_del('datavizcalcul_class_vill_intern');
+	variable_del('datavizcalcul_part_coll_eng_open_data');
+	variable_del('datavizcalcul_part_delib_coll_acce_port_int');
+	variable_del('datavizcalcul_taux_part_mar_coll');
+	variable_del('datavizcalcul_poids_econ_soc_empl');
+	variable_del('datavizcalcul_part_ecol_lab');
+	variable_del('datavizcalcul_part_etab_scol_ag21');
+	variable_del('datavizcalcul_label_personage');
+	variable_del('datavizcalcul_colors');
+	variable_del('datavizcalcul_labels');
+	}
+

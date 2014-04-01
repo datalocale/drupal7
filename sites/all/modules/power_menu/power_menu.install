@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ *
+ * just containing the stuff for install and uninstall
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function power_menu_uninstall() {
+  variable_del('power_menu_handlers_settings');
+  variable_del('power_menu_handlers_menus');
+  variable_del('power_menu_handlers_enabled');
+  variable_del('power_menu_handlers_breadcrumb');
+  variable_del('power_menu_handlers_breadcrumb_title');
+
+  variable_del('power_menu_path_bundles');
+  variable_del('power_menu_path_number');
+
+  variable_del('power_menu_node_bundles');
+
+  variable_del('power_menu_taxonomy_vocabulary');
+  variable_del('power_menu_taxonomy_terms');
+}
+
+/**
+ * Implements hook_install().
+ */
+function power_menu_install() {
+  // Nothing...
+}
+
+/**
+ * Implements hook_schema().
+ */
+function power_menu_schema() {
+
+  // Add a cache table for power menu
+  $schema['cache_power_menu'] = drupal_get_schema_unprocessed('system', 'cache');
+
+  $schema['power_menu_fields'] = array(
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'menu_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The unique key for menu. This is used as a block delta so length is 32.',
+      ),
+      'mlid' => array(
+        'description' => 'The menu link id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'menu_name_mlid' => array('menu_name', 'mlid'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Update version 6.x and 7.1 to 7.2 and migrate existing data to the new structure.
+ */
+function power_menu_update_7200() {
+  // Add a new schema
+  $schema = power_menu_schema();
+  db_create_table('cache_power_menu', $schema['cache_power_menu']);
+  db_create_table('power_menu_fields', $schema['power_menu_fields']);
+
+  // Update taxonomy related menu_links
+  // Update node related menu_links
+  // Update path related content types
+  // Remove schema 'power_menu'
+  db_drop_table('power_menu');
+
+  // Migrate the properties to fields
+}

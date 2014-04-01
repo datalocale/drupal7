@@ -1,0 +1,6 @@
+name = ebiz Module
+description = Ebiz
+package = Ebiz modules
+;configure = admin/config/system/ckan
+version = "7.x-1.0"
+core = "7.x"

@@ -1,0 +1,193 @@
+<?php
+/**
+ * The hook_init
+ *
+ *
+ */
+function dataviz_init(){
+  global $base_path;
+$path = drupal_get_path('module', 'dataviz');
+
+$pt=libraries_get_path("jquery.livequery");
+drupal_add_js($pt . '/jquery.livequery.js');
+
+drupal_add_js($path . '/jquery.scrollTo-1.4.2-min.js');
+drupal_add_js($path . '/jquery.localscroll-1.2.7.js');
+//drupal_add_js(" jQuery('#dep-links').localScroll({ target:'#slider'});	", 'inline');
+
+$ptf=libraries_get_path("fooTable");
+drupal_add_js($ptf . '/js/footable-0.1.js');
+drupal_add_js($ptf . '/js/footable-scripts.js');
+
+drupal_add_js($path . '/jquery.easing.1.3.js');
+drupal_add_js($path . '/jquery.mousewheel.min.js');
+drupal_add_js($path . '/flowslider.jquery.js');
+drupal_add_js($path . '/jquery.slidecontent.js');
+
+drupal_add_js($path . '/datavizcom.js', array('type' => 'file', 'scope' => 'footer'));
+drupal_add_css($path . '/dataviz.css');
+drupal_add_js($path . '/jquery.qtip-1.0.0-rc3.js',array('type' => 'file', 'scope' => 'footer'));
+
+
+
+
+}
+/**
+ * The hook_menu
+ *
+ *
+ */
+function dataviz_menu(){
+	$items = array();
+
+	$items['datavisualisation'] = array(
+    'page callback'   => 'dataviv_page',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+
+	);
+
+	$items['pienavs/%'] = array(
+    'page callback'   => 'dataviz_getpienavs',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+	'page arguments' => array(1),
+
+	);
+	$items['bonhommes/%/%'] = array(
+    'page callback'   => 'dataviz_bonhommes',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+	'page arguments' => array(1,2),
+
+	);
+
+	return $items;
+}
+
+
+function dataviv_page(){
+	return  theme("dataviz");
+}
+function dataviz_getpienavs($id){
+$pienavs['id']=$id;
+echo  theme("pienavs",array('pienavs'=>$pienavs));
+}
+function dataviz_bonhommes($id,$iddep){
+$arr['id']=$id;
+$arr['iddep']=$iddep;
+	echo  theme("bonhommes",array('arr'=>$arr));
+}
+function dataviz_theme($existing, $type, $theme, $path) {
+  return array(
+      'pienavs' => array(
+       'template' => 'pienavs','variables' => array('pienavs'=>null),
+    ),
+    'dataviz' => array(
+      'template' => 'dataviz',
+    ) ,
+    'bonhommes' => array(
+      'template' => 'bonhommes','variables' => array('arr'=>null),
+    ),'piedata' => array(
+      'template' => 'piedata','variables' => array('piedata'=>null),
+    )
+
+    );
+
+
+}
+
+function createjsonfile(){
+$query = db_select('dataviz_calcul', 'dc');
+$query->fields('dc', array('id_formule', 'valeur_formule','id_departement','valeurs_personnages'));
+$results = $query->execute();
+$arrcouleurs=unserialize(variable_get('datavizcalcul_colors'));
+$arrlabels=unserialize(variable_get('datavizcalcul_labels'));
+//print_r($arrcouleurs);
+//print_r($result);
+
+while($record = $results->fetchAssoc()){
+	$arrvp=array();
+	$arrvplbs=array();
+
+	$ig=gettauxdegouvernance($record['id_departement']);
+	$arrlabelsvp=unserialize(variable_get('datavizcalcul_label_personage'));
+	$arrvp=unserialize($record['valeurs_personnages']);
+	foreach($arrvp as $k=>$v)$arrvplbs[$arrlabelsvp[$k]]=$v;
+	$var = number_format($record['valeur_formule'],2);
+$data[$record['id_departement']][] = array("cat"=> $arrlabels[$record['id_formule']],"val"=> $var, "color"=> $arrcouleurs[$record['id_formule']],"id"=>$record['id_formule'],"vp"=>$arrvplbs);
+
+
+
+}
+
+//echo'[{"cat":"D\u00e9mocratie locale","val":"30.6295","color":"#3db158","id":"demo_loc"},{"cat":"Citoyennet\u00e9 et droits civiquese","val":"18.4339","color":"#d1d1d1","id":"cito_droi_civ"},{"cat":null,"val":"10.8527","color":null,"id":"inst_act_part "},{"cat":"Mise en capacit\u00e9 des personnes","val":"19.2937","color":"#e84837","id":"proj_ter"},{"cat":"Administration et services","val":"15.1938","color":"#b3b3b3","id":"admin_serv"},{"cat":"Secteur Economique","val":"21.7054","color":"#ebd944","id":"sect_eco"},{"cat":"Projet territorial","val":"21.7054","color":"#3cb9e6","id":"mis_cap_pers"}]';
+// Send the data.
+global $base_path;
+$docroot= $_SERVER['DOCUMENT_ROOT'].$base_path;
+
+$filename = $docroot.'sites/all/modules/dataviz/dataviz.json';
+$somecontent = json_encode($data);
+
+// Let's make sure the file exists and is writable first.
+if (is_writable($filename)) {
+
+    // In our example we're opening $filename in append mode.
+    // The file pointer is at the bottom of the file hence
+    // that's where $somecontent will go when we fwrite() it.
+    if (!$handle = fopen($filename, 'w+')) {
+         echo "Cannot open file ($filename)";
+         exit;
+    }
+
+    // Write $somecontent to our opened file.
+    if (fwrite($handle, $somecontent) === FALSE) {
+        echo "Cannot write to file ($filename)";
+        exit;
+    }
+
+    echo "Success, wrote ($somecontent) to file ($filename)";
+
+    fclose($handle);
+
+} else {
+    echo "The file $filename is not writable";
+}
+}
+
+
+
+
+function gettauxdegouvernance($iddep){
+	$query = db_select('dataviz_indice_gouvernance', 'dc');
+    $query->condition('dc.id_departement', $iddep, '=')
+      ->fields('dc', array('valeur'));
+      $result = $query->execute();
+	return round(key($result->fetchAllAssoc('valeur')),2);
+}
+function getbonhommes($id,$iddep){
+$query = db_select('dataviz_calcul', 'dc');
+$query->condition('dc.id_departement', $iddep, '=')
+    ->condition('dc.id_formule', $id, '=')
+      ->fields('dc', array('valeurs_personnages'))
+      ->range(0, 1);
+$result = $query->execute();
+return key($result->fetchAllAssoc('valeurs_personnages'));
+}
+
+
+function dataviz_form_alter(&$form, &$form_state, $form_id) {
+  //echo $form_id; echo $form['#id'];
+  if($form['#id']=="views-exposed-form-departements-block-1"){
+$form['field_region_tid']['#options']['All']= t('- Choisissez une région -');  }}
+
+function getdepartmenettitle($id){
+  $query = db_select('field_data_field_departementid ', 'dp');
+$query->join('node', 'n', 'n.nid = dp.entity_id');
+$query->condition('dp. 	field_departementid_value', $id, '=')
+ ->fields('n', array('title'))
+      ->range(0, 1);
+$result = $query->execute();
+return key($result->fetchAllAssoc('title'));
+}

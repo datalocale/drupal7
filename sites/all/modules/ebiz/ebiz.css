@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+.circle{
+    margin-top:-88px;
+    margin-left:-88px;
+
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:-1;
+    opacity:0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+#contentanimationleft,#contentanimationright,#contentanimationcenter{text-align:center;}
+ul.animation li{list-style:none;float:left;display:inline;	text-align:center;}
+.titreanimation{position:absolute;top:15px;left:150px;color:#ffffff;font-size:22px; font-family:folks;}
+#contentanimationright img{margin:45px 0 0 0;}
+#contentanimationcenter ,#contentanimationleft ,#contentanimationright {margin:45px 0 10px 0;}
+#contentanimationright h2{top:80px;}
+#contentanimationright .titreanimation{top:45px;}

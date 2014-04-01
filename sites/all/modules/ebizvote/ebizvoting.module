@@ -1,0 +1,73 @@
+<?php
+//echo drupal_get_form("apachesolr_search_custom_page_search_form");
+/**
+ * Implements hook_init().
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function ebizvoting_form_alter(&$form, &$form_state, $form_id) {
+ // echo $form_id;
+if ($form_id == 'webform_client_form_16043' || $form_id == 'webform_client_form_16882') {$form['#action'] = 'datavisualisation';$form_state['redirect'] = 'datavisualisation';}
+
+}
+function ebizvoting_init() {
+if (arg(0) == 'datavisualisation') {drupal_add_library('system', 'ui.slider');
+drupal_add_css(drupal_get_path('module', 'ebizvoting') . '/css/jquery-ui-1.7.1.custom.css');
+drupal_add_css(drupal_get_path('module', 'ebizvoting') . '/css/ui.slider.extras.css');
+drupal_add_js(drupal_get_path('module', 'ebizvoting') . '/js/selectToUISlider.jQuery.js');
+drupal_add_js(drupal_get_path('module', 'ebizvoting') . '/js/ebizvoting.js');
+drupal_add_js('sites/all/libraries/colorbox/colorbox/jquery.colorbox.js');
+drupal_add_js('
+function submitform() {
+jQuery("#colorbox, #cboxOverlay").css("display","none");
+jQuery("#colorbox, #cboxOverlay").appendTo("#webform-client-form-16043");
+jQuery("#colorbox, #cboxOverlay").appendTo("#webform-client-form-16882");
+jQuery("#webform-client-form-16043").submit();
+jQuery("#webform-client-form-16882").submit();
+}
+jQuery(document).ready(function () {
+var texte = jQuery("#webform-component-separateur  div.fieldset-wrapper ").html();
+var texte2 = "<div id=\'submitreplaced\' onClick =\'submitform()\'>Soumettre</div>";
+jQuery("#webform-component-separateur legend span").colorbox({inline:true, width:"40%",href:  texte + texte2});
+jQuery("#webform-component-separateur  div.fieldset-wrapper ").remove();
+jQuery("#cboxContent select").change(function(){
+alert("changed");
+});
+});', 'inline');
+}
+ //drupal_add_js();
+}
+/*The voting webform alter=======thank you replacement */
+function ebizvoting_node_view($node, $view_mode) {
+if(arg(0)=="datavisualisation")$node->content['webform']['#theme'] = 'ebizvoting_view';
+}
+function ebizvoting_theme(){
+$theme = array(
+// webform.module.
+'ebizvoting_view' => array(
+'render element' => 'webform',
+));
+// Theme functions in all components.
+  $components = webform_components(TRUE);
+  foreach ($components as $type => $component) {
+    if ($theme_additions = webform_component_invoke($type, 'theme')) {
+      $theme = array_merge($theme, $theme_additions);
+    }
+  }
+  return $theme;
+ }
+function theme_ebizvoting_view($variables) {
+$node1=$variables['webform']['#node'];
+// - Only show the form if this user is allowed access.
+//+ showing results in case the user has already submitted the survey
+if ($variables['webform']['#enabled'] && !isset($_GET['sid']) ) {
+return drupal_render($variables['webform']['#form']);
+}
+
+else{
+return "<h2>Vous avez deja donné votre avis </h2>";
+}
+
+}

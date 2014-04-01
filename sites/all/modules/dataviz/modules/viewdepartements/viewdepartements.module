@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the viewdepartements feature.
+ */
+
+include_once 'viewdepartements.features.inc';

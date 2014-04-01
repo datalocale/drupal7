@@ -1,0 +1,52 @@
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+
+#region-postscript-second li{list-style:none;float:left;clear:both;margin:0 0 0 110px;line-height: 1.2;}
+#region-postscript-second li.leaf.last {line-height: 27px;margin: 1px 0 0 117px;}
+#region-postscript-second li.leaf.first {margin:19px 0 0 98px;}
+ .page-sources .region-sidebar-first .block{background-repeat:no-repeat;width:90%;float:right;}
+.page-sources .region-content .block{background-repeat:no-repeat;}
+.page-sources .region-sidebar-second .block{background-repeat:no-repeat;backgroud-position:center;width:83%;float:right;}
+.page-sources  .block {text-align:center;color:#ffffff;}
+h2.block-title {font-size: 22px;}
+ #region-footer-first .block-multiblock{display:none;}
+.page-usages .block {text-align:center;color:#ffffff;}
+.page-usages .region-sidebar-first .block{background-repeat:no-repeat;}
+.page-usages .region-content .block{background-repeat:no-repeat;width:80%;}
+.page-usages .region-sidebar-second .block{background-repeat:no-repeat;}
+.page-usages .region-content .block .content{width:83%;}
+.page-usages .region-sidebar-second .block ul li{text-align:right;list-style:none;}
+.page-sources .region-content h1,.page-usages .region-content h1{display:none;}
+.page-usages .region-content .block {margin-top:117px;}
+.page-sources .region-content .block{margin-top:100px;}
+/* page source */
+.page-sources .region-sidebar-first .block{color:#ffffff; text-align:center; margin :15%;}
+/* fin page source */
+.view-blockconcept {color:#ffffff; }
+.page-groupes .region-contentbottomleft .block,.page-groupes .region-contentbottomright .block,.page-thematiques .region-contentsecondzoneright .block{color:#ffffff;}
+.page-thematiques .region-contentsecondzoneright #block-block-11{text-align:center;padding:9%}
+#region-postscript-second { background-repeat: no-repeat;background-position:center;}
+
+.view-blockconcept .part1donnee{float:left;width:40%;padding:13% 0 0 6%;}
+.view-blockconcept .part2donnee{float:left;width:40%;padding:8% 5% 0 3%;}
+
+.page-thematiques .region-contentsecondzoneleft .block{background-repeat:no-repeat;}
+.page-thematiques .region-contentsecondzoneright .block{background-repeat:no-repeat;}
+.page-groupes .region-contentbottomleft .block{background-repeat:no-repeat;}
+.page-applications #block-multiblock-1,.page-applications .view-applicationslideshow{display:block;}
+
+
+.page-groupes .region-contentbottomright .block{background-repeat:no-repeat;}
+.page-bonnes-pratiques .region-sidebar-first-inner .block{background-repeat:no-repeat; color:#ffffff;}
+
+
+.view-blockconcept{background-repeat:no-repeat;}
+.view-blockconcept select{font-size:13px;}
+.view-blockconcept {font-size:13px;}
+#block-views-derniersblogs-block .views-row{background-repeat:no-repeat;}
+#block-views-blocksapplication-block-1 .feed-icon {left: 77%;position: absolute;top: 2.4%; }
+#block-views-blocksapplication-block-2 .feed-icon{left: 27%;position: absolute;top: 1.5%;}
+
+
+
+
+#block-views-blocksapplication-block-2 .block-inner {background-color: #F3F3F3;float: left;width: 78%;}

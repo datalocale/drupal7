@@ -1,0 +1,7 @@
+name = Datavisualisation calcul
+description = Dataviv calcul
+package = Ebiz modules
+dependencies[] = tabledataviz
+configure = admin/config/system/datavizcalcul
+version = "7.x-1.0"
+core = "7.x"

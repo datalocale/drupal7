@@ -1,0 +1,167 @@
+/* This file will hold styles that are loaded using the same media query as the narrow grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the normal and widescreen layouts. You may override these styles in the normal 
+ *  and widescreen CSS files as appropriate. */
+body{font-size:10px;}
+a{font-size:10px;}
+.block h2{font-size:14px;}
+#region-menu .menu li a{font-size:12px;}
+/*--------APPLICATION-----------*/
+#block-views-blocksapplication-block-1{background-image:url("../images/narrow/bg_populaires.png");   background-position: 0 0.5%;}
+ #block-views-blocksapplication-block-2 .feed-icon {left: 37%;position: absolute;top: 2.5%;}
+#block-views-blocksapplication-block-1 .view-content {background-color: #F3F3F3;float: left;margin: 0 0 0 3%;padding: 0.8% 0 0;width: 77%;}
+#block-views-blocksapplication-block-1 .view-content .views-row, #block-views-blocksapplication-block-2 .view-content .views-row {background-position: 5px 13px;}
+#block-views-blocksapplication-block-2 .block-inner {
+    background-color: #F3F3F3;
+    float: left;
+    margin: 0 0 5% 3%;
+    padding: 0 0 3%;
+    width: 77%;
+}
+/*---------------------*/
+#block-views-derniersblogs-block .views-row{background-image:url("../images/narrow/tagadelic_3.png");height:126px;padding:0 0 0 63px;clear:both;}
+#block-views-derniersblogs-block a {margin:29px 0 0 0;font-size:13px;}
+ #block-tagadelic-3{background-image:url("../images/narrow/bg_recherche.png"); }
+#region-postscript-second #block-menu-menu-participez-{ background-image: url("../images/narrow/participez_bg.png");height:194px;}
+#region-postscript-second li{margin:0 0 0 86px;}
+#region-postscript-second li.leaf.last {line-height: 27px;margin: 1px 0 0 82px;}
+#region-postscript-second li.leaf.first {margin:13px 0 0 82px;}
+.page-sources .region-sidebar-first .block{padding-top:20px;height:175px;	background-image:url('../images/narrow/rougecercleleftsource.png');}
+.page-sources .region-content .block{padding:10px 12px 0 10px;height:210px;font-size:8px;background-image:url('../images/narrow/rougecerclecentresource.png');}
+.page-sources .region-sidebar-second .block{padding-top:37px;height:141px;background-image:url('../images/narrow/rougecerclerightsource.png');}
+
+.page-usages .region-sidebar-first .block{padding:40px 10px 0 10px;height:195px;	background-image:url('../images/narrow/leftusages.png');}
+.page-usages .region-content .block{padding:12px 0 0 9px;height:164px;background-image:url('../images/narrow/centreusages.png');}
+.page-usages .region-sidebar-second .block{padding-top:3px;height:256px;background-image:url('../images/narrow/rightusages.png');}
+
+.page-usages .region-sidebar-second .block ul li.app1{padding-right:55px;}
+.page-usages .region-sidebar-second .block ul li.app2{padding-right:24px;}
+.page-usages .region-sidebar-second .block ul li.app3{padding-right:8px;}
+
+/*------------Table-------------------*/
+   table.views-table thead th{font-size:10px;	}
+  table.views-table td{font-size:10px;}
+ table.views-table th a, table.views-table td a{font-size:10px;}
+.page-usages .region-sidebar-second .block ul li.app4{padding-right:30px;}
+.page-usages .region-sidebar-second .block ul li{padding-bottom:13px;}
+
+.page-bonnes-pratiques .region-sidebar-first-inner .block{padding:40px 30px 10px;height:170px;background-image:url('../images/narrow/bonnepratiqueleft.png');}
+
+.page-thematiques .region-contentsecondzoneleft .block{padding:58px 20px 0 20px;height:263px;	background-image:url('../images/narrow/lefttheme.png');}
+.page-thematiques .region-contentsecondzoneright .block{height:159px;background-image:url('../images/narrow/righttheme.png');font-size:8px}
+ 
+ .node-type-reference #block-views-bonnepratiquesdujour-block-1,.node-type-reference #block-views-bonnepratiquesdujour-block-2 ,.node-type-reference #block-views-bonnepratiquesdujour-block-3,.node-type-reference #block-views-bonnepratiquesdujour-block-4,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1,.node-type-idees #block-views-bonnepratiquesdujour-block-2 ,.node-type-idees #block-views-bonnepratiquesdujour-block-3,.node-type-idees #block-views-bonnepratiquesdujour-block-4,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1,.node-type-code-source #block-views-bonnepratiquesdujour-block-2 ,.node-type-code-source #block-views-bonnepratiquesdujour-block-3,.node-type-code-source #block-views-bonnepratiquesdujour-block-4,
+ .node-type-page #block-views-bonnepratiquesdujour-block-1, .node-type-page #block-views-bonnepratiquesdujour-block-2 ,.node-type-page #block-views-bonnepratiquesdujour-block-3,.node-type-page #block-views-bonnepratiquesdujour-block-4,.page-groupes .region-contentbottomleft .block{height:159px;background-image:url('../images/narrow/righttheme.png');font-size:8px}
+.page-groupes .region-contentbottomright .block{height:159px;background-image:url('../images/narrow/righttheme.png');font-size:8px}
+.page-groupes .region-contentbottomright .block a:link,.page-groupes .region-contentbottomright .block a:visited,.page-groupes .region-contentbottomright .block a{font-size:8px;}
+
+.node-type-reference #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-reference #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-reference #block-views-bonnepratiquesdujour-block-4 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-4 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-4 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-4 a,
+.page-groupes .region-contentbottomleft .block a,
+.node-type-page #block-views-bonnepratiquesdujour-block-1 a:link,
+.node-type-page #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-page #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-page #block-views-bonnepratiquesdujour-block-4 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-4 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-4 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-4 a:link,
+.page-groupes .region-contentbottomleft .block a:link,
+.node-type-page #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-page #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-page #block-views-bonnepratiquesdujour-block-4 a:visited,
+.node-type-page #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-4 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-4 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-4 a:visited,
+ .page-groupes .region-contentbottomleft .block a:visited
+{font-size:8px;}
+.view-blockconcept{height:242px;background-image:url('../images/narrow/donneesleft.png');}
+.view-blockconcept { font-size:10px;}
+.view-blockconcept h2{font-size:12px;}
+.view-blockconcept select{font-size:10px;}
+/*donees*/
+.page-donnees #zone-content .block-views-groupes-block-1 .views-field-title,.page-donnees #zone-content .block-views-groupes-block-1 .views-field-body {font-size:10px;}
+.page-donnees #zone-content .block-views-groupes-block-1 .content a{font-size:10px;}
+.page-donnees #zone-content .block-views-groupes-block-1 .view-footer a {margin: 0 0 0 10px;padding: 5px 12px;}
+#block-ebiz-bonnespratiques {background-image:url('../images/narrow/bgbpcentre.png');background-repeat:no-repeat;height:221px;}
+.term35034{padding:5% 0 0 3%;width:150px;text-align:center;}
+.term35035{padding:24% 0 0 4%;}
+.term35033{padding:5% 0 0 3%;width:150px;text-align:center;}
+/* tagadelic */
+#block-tagadelic-3 {padding-bottom:13px;}
+.page-donnees #zone-content .block-views-groupes-block-1 .views-field-field-gimage{ width: 30%;}
+.page-donnees #zone-content .block-views-groupes-block-1 .views-field-title,.page-donnees #zone-content .block-views-groupes-block-1 .views-field-body {width: 65%;}
+#contentanimationrightnarrow,#contentanimationleftnarrow,#contentanimationcenternarrow{display:block;visibility:visible;}
+#contentanimationcenter,#contentanimationleft,#contentanimationright{display:none;}
+.firstlink a{	background:transparent url(../images/narrow/homecenterlink1.png) no-repeat;margin-right:27px;}
+.secondlink a{background:transparent url(../images/narrow/homecenterlink2.png) no-repeat ;margin-right:27px;}
+.thirdlink a{	background:transparent url(../images/narrow/homecenterlink3.png) no-repeat ;}
+
+.firstlinkleft a{	background:transparent url(../images/narrow/homerougelink1.png) no-repeat;margin-right:27px;}
+.secondlinkleft a{background:transparent url(../images/narrow/homerougelink2.png) no-repeat ;margin-right:27px;}
+.thirdlinkleft a{	background:transparent url(../images/narrow/homerougelink3.png) no-repeat ;}
+
+.firstlinkright a{	background:transparent url(../images/narrow/homebleulink1.png) no-repeat;margin-right:27px;}
+.secondlinkright a{background:transparent url(../images/narrow/homebleulink2.png) no-repeat ;margin-right:27px;}
+.thirdlinkright a{	background:transparent url(../images/narrow/homebleulink3.png) no-repeat ;}
+
+
+ul.animation li a{display:block;visibility:visible;color:#000;width:73px;height:16px;padding-top:64px;}
+#contentanimationrightnarrow{margin-top:38px;}
+.titreanimationnarrow a{color:#ffffff;}
+ul.animation li{width:73px;height:84px;}
+
+#contentanimationcenternarrow  h2 {background-image:url("../images/narrow/homecentre.png");height:174px;display:block;visibility:visible;background-repeat:no-repeat; padding: 10px 0 0 72px;}
+#contentanimationleftnarrow  h2 {background-image:url("../images/narrow/homeleft.png");height:174px;display:block;visibility:visible;background-repeat:no-repeat; padding: 10px 0 0 72px;}
+#contentanimationrightnarrow  h2 {background-image:url("../images/narrow/handhome.png");height:150px;display:block;visibility:visible;background-repeat:no-repeat; padding: 0 0 0 50px;}
+
+.view-departements{width:600px;  background-image:url(../images/narrow/bgtimeline.png);
+  height:268px;
+  margin:0 auto;
+  padding:20px 40px;
+}
+.page-datavisualisation #block-multiblock-6{width:678px;}
+.ws_next{right:-147px;}
+.ws_prev{left:-149px;}
+#block-webform-client-block-16882,#block-webform-client-block-16043{right:-32px;}
+.view-departements .view-content{position:relative;}
+#block-system-main-menu.block-system.contextual-links-region {margin-left:0;}
+
+.field-name-field-liendataviz{clear:both;width:auto;}
+
+.field-name-field-texte-avant-bouton {font-size:19px;width:auto;clear:both;}
+#region-user-first a {margin-left: 23%;}

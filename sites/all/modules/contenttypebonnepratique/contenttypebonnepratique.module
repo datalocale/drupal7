@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the contenttypebonnepratique feature.
+ */
+
+include_once 'contenttypebonnepratique.features.inc';

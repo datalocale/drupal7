@@ -1,0 +1,15 @@
+; $Id: bulkdelete.info,v 1.2.2.2 2011/01/30 09:43:30 karst Exp $
+name = Bulk Delete
+description = Adds an administrative option to bulk delete nodes by content type using the batch API.
+core = 7.x
+configure = admin/content/bulkdelete
+
+files[] = bulkdelete.admin.inc
+files[] = bulkdelete.module
+
+; Information added by drupal.org packaging script on January 1, 1970 - 00:00
+version = "7.x-1.2"
+core = "7.x"
+project = "bulkdelete"
+datestamp = "1296396234"
+

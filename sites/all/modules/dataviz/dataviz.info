@@ -1,0 +1,10 @@
+name = Datavisualisation
+description = Dataviv
+package = Ebiz modules
+;configure = admin/config/system/ckan
+dependencies[] = datavizcalcul
+dependencies[] = viewdepartements
+dependencies[] = txregion
+dependencies[] = ctdepartement
+version = "7.x-1.0"
+core = "7.x"

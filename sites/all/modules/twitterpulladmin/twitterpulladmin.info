@@ -1,0 +1,14 @@
+name = "Twitter pull administration"
+description = Allows your site to be tracked by Google Analytics by adding a Javascript tracking code to every page.
+core = 7.x
+dependencies[] = twitter_pull
+dependencies[] = block
+package = Ebiz modules
+configure = admin/config/system/twitterpulladmin
+
+
+version = "7.x-1.2"
+core = "7.x"
+project = "twitterpulladmin"
+datestamp = "1301340367"
+

@@ -1,0 +1,5 @@
+name = Apache Solr View Modes
+description = Extends Apache Solr module by adding view mode support for search results
+package = Ebiz modules
+core = 7.x
+dependencies[] = apachesolr

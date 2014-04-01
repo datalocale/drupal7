@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the donneesviews feature.
+ */
+
+include_once 'donneesviews.features.inc';

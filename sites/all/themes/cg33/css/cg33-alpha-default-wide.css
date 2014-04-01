@@ -1,0 +1,149 @@
+/* This file will hold styles that are loaded using the same media query as the wide grid. */
+ body{font-size:14px;}
+ a{font-size:14px;}
+ #block-views-derniersblogs-block .views-row{background-image:url("../images/wide/tagadelic_3.png");height:190px;padding:0 0 0 95px;}
+ #block-views-blocksapplication-block-1{background-image:url("../images/wide/bg_populaires.png");}
+  #block-views-blocksapplication-block-1 .view-content{   background-color: #F3F3F3;
+    float: left;
+    margin: 0% 0 0 2.3%;
+    padding: 0.8% 0 0;
+    width: 78%;}
+#block-views-blocksapplication-block-2 .block-inner {margin: 0 0 5% 2.2%;}
+#block-tagadelic-3{background-image:url("../images/wide/bg_recherche.png"); }
+ #region-postscript-second #block-menu-menu-participez-{ background-image: url("../images/wide/participez_bg.png");height:335px;}
+ #region-postscript-second ul.menu{margin:7%;}
+.page-sources .region-sidebar-first .block{padding-top:30px;height:317px;	background-image:url('../images/wide/rougecercleleftsource.png');}
+.page-sources .region-content .block{padding-top:20px;height:368px;font-size:14px;background-image:url('../images/wide/rougecerclecentresource.png');}
+.page-sources .region-sidebar-second .block{padding-top:50px;height:260px;background-image:url('../images/wide/rougecerclerightsource.png');}
+
+.page-usages .region-sidebar-first .block{padding:75px 30px 0 30px ;height:332px;	background-image:url('../images/wide/leftusages.png');}
+.page-usages .region-content .block{padding:27px 0 0 15px;height:280px;background-image:url('../images/wide/centreusages.png');}
+.page-usages .region-sidebar-second .block{padding-top:10px;height:256px;background-image:url('../images/wide/rightusages.png');}
+.page-usages  .block h2{font-size:22px;}
+.page-usages .region-sidebar-second .block ul li.app1{padding-right:100px;}
+.page-usages .region-sidebar-second .block ul li.app2{padding-right:40px;}
+.page-usages .region-sidebar-second .block ul li.app3{padding-right:20px;}
+.page-usages .region-sidebar-second .block ul li.app4{padding-right:55px;}
+.page-usages .region-sidebar-second .block ul li{padding-bottom:28px;}
+
+.page-bonnes-pratiques .region-sidebar-first-inner .block{padding:60px 45px 20px;height:320px;background-image:url('../images/wide/bonnepratiqueleft.png');}
+
+
+.page-thematiques .region-contentsecondzoneleft .block{height:340px;	background-image:url('../images/wide/lefttheme.png');}
+.page-thematiques .region-contentsecondzoneright .block{height:278px;background-image:url('../images/wide/righttheme.png');font-size:13px;}
+
+.node-type-reference #block-views-bonnepratiquesdujour-block-1,.node-type-reference #block-views-bonnepratiquesdujour-block-2 ,.node-type-reference #block-views-bonnepratiquesdujour-block-3,.node-type-reference #block-views-bonnepratiquesdujour-block-4,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1,.node-type-idees #block-views-bonnepratiquesdujour-block-2 ,.node-type-idees #block-views-bonnepratiquesdujour-block-3,.node-type-idees #block-views-bonnepratiquesdujour-block-4,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1,.node-type-code-source #block-views-bonnepratiquesdujour-block-2 ,.node-type-code-source #block-views-bonnepratiquesdujour-block-3,.node-type-code-source #block-views-bonnepratiquesdujour-block-4,
+.node-type-page #block-views-bonnepratiquesdujour-block-1,.node-type-page #block-views-bonnepratiquesdujour-block-2 ,.node-type-page #block-views-bonnepratiquesdujour-block-3,.node-type-page #block-views-bonnepratiquesdujour-block-4,.page-groupes .region-contentbottomleft .block{height:278px;background-image:url('../images/wide/righttheme.png');font-size:13px;}
+.page-groupes .region-contentbottomright .block{height:278px;background-image:url('../images/wide/righttheme.png');font-size:13px;}
+.page-groupes .region-contentbottomright .block a:link,.page-groupes .region-contentbottomright .block a:visited,.page-groupes .region-contentbottomright .block a{font-size:13px;}
+
+.node-type-reference #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-reference #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-reference #block-views-bonnepratiquesdujour-block-4 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-idees #block-views-bonnepratiquesdujour-block-4 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-4 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-2 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-1 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-3 a,
+.node-type-page #block-views-bonnepratiquesdujour-block-4 a,
+ .page-groupes .region-contentbottomleft .block a,
+  .node-type-page #block-views-bonnepratiquesdujour-block-1 a:link,
+ .node-type-page #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-page #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-page #block-views-bonnepratiquesdujour-block-4 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-reference #block-views-bonnepratiquesdujour-block-4 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-idees #block-views-bonnepratiquesdujour-block-4 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-3 a:link,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-4 a:link,
+.page-groupes .region-contentbottomleft .block a:link,
+.node-type-page #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-page #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-page #block-views-bonnepratiquesdujour-block-4 a:visited,
+.node-type-page #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-reference #block-views-bonnepratiquesdujour-block-4 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-idees #block-views-bonnepratiquesdujour-block-4 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-3 a:visited,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-4 a:visited,
+ .page-groupes .region-contentbottomleft .block a:visited{font-size:13px;}
+.page-groupes .region-contentbottomright #block-block-13 .inscrirelink{background-image:url('../images/wide/lieninscrire.png');}
+
+.view-blockconcept{height:411px;background-image:url('../images/wide/donneesleft.png');}
+/*donnes*/
+.page-donnees #zone-content .block-views-groupes-block-1 .views-field-title,.page-donnees #zone-content .block-views-groupes-block-1 .views-field-body {font-size:12px;}
+.page-donnees #zone-content .block-views-groupes-block-1 .content a{font-size:12px;}
+
+/* animation */
+#zone-content-home{height:486px;}
+#block-ebiz-bonnespratiques {background-image:url('../images/wide/bgbpcentre.png');background-repeat:no-repeat;height:499px;}
+.term35034{width:256px;text-align:center;}
+.term35035{padding:24% 5% 0 5%;text-align:center;}
+.term35033{width:256px;text-align:center;padding:5% 0 0;}
+
+#block-views-derniersblogs-block a{font-size:16px;}
+.page-donnees #zone-content .block-views-groupes-block-1 .views-field-field-gimage{ width: 20%;}
+.page-donnees #zone-content .block-views-groupes-block-1 .views-field-title,.page-donnees #zone-content .block-views-groupes-block-1 .views-field-body {width: 75%;}
+#contentanimationrightnarrow,#contentanimationleftnarrow,#contentanimationcenternarrow{display:none;visibility:hidden;}
+#contentanimationcenter,#contentanimationleft,#contentanimationright{display:block;visibility:visible;}
+.firstlink a{	background:transparent url(../images/wide/homecenterlink1.png) no-repeat;margin-right:27px;}
+.secondlink a{background:transparent url(../images/wide/homecenterlink2.png) no-repeat ;margin-right:27px;}
+.thirdlink a{	background:transparent url(../images/wide/homecenterlink3.png) no-repeat ;}
+
+.firstlinkleft a{	background:transparent url(../images/wide/homerougelink1.png) no-repeat;margin-right:27px;}
+.secondlinkleft a{background:transparent url(../images/wide/homerougelink2.png) no-repeat ;margin-right:27px;}
+.thirdlinkleft a{	background:transparent url(../images/wide/homerougelink3.png) no-repeat ;}
+
+.firstlinkright a{	background:transparent url(../images/wide/homebleulink1.png) no-repeat;margin-right:27px;}
+.secondlinkright a{background:transparent url(../images/wide/homebleulink2.png) no-repeat ;margin-right:27px;}
+.thirdlinkright a{	background:transparent url(../images/wide/homebleulink3.png) no-repeat ;}
+
+ul.animation li{width:100px;height:114px;}
+ul.animation li a {   color: #000000;
+    display: block;
+    height: 25px;
+    padding-top: 90px;
+    width: 100px;}
+#contentanimationleft,#contentanimationcenter,#contentanimationright{position:relative;}
+.view-id-mappackage ,.donnees,.donnees .field{clear:both;}
+
+#region-menu .menu li a{font-size:16px;}
+.view-departements{width:975px;  background-image:url(../images/wide/bgtimeline.png);
+  height:268px;
+  margin:0 auto;
+  padding:20px 40px;
+}
+.page-datavisualisation #block-multiblock-6{width:1053px;}
+.ws_next{right:-147px;}
+.ws_prev{left:-149px;}
+#block-webform-client-block-16882,#block-webform-client-block-16043{right:45px;}
+.view-departements .view-content{position:relative;}
+#block-system-main-menu.block-system.contextual-links-region {margin-left:82px;}
+.field-name-field-liendataviz{float:left;width:30%;clear:none;}
+.field-name-field-texte-avant-bouton {width:70%;float:left;line-height:1.2;clear:none;font-size:29px;}
+#region-user-second .search-form{margin:4% 0;}
+#region-user-first a {margin-left: 28%;}
+.breadcrumb {margin-left: 1%;}

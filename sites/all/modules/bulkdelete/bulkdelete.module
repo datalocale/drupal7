@@ -1,0 +1,80 @@
+<?php
+
+// $Id: bulkdelete.module,v 1.8.2.3 2011/01/30 13:55:38 karst Exp $
+
+/**
+ * @file
+ * Main file of the bulkdelete module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function bulkdelete_menu() {
+  $items = array();
+
+  $items['admin/content/bulkdelete'] = array(
+    'title' => 'Bulk delete nodes',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bulkdelete_form'),
+    'access arguments' => array('administer nodes'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 11,
+    'file' => 'bulkdelete.admin.inc',
+  );
+  /*
+    $items['admin/structure/taxonomy/delete'] = array(
+    'title' => 'Bulk delete terms',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bulkdelete_terms_form'),
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 11,
+    'file' => 'bulkdelete.admin.inc',
+    );
+   */
+  return $items;
+}
+
+/**
+ * Quickly delete nodes.
+ * The trick is to avoid node_delete() that fully loads a
+ * node in advance. We try to discover all implementations of hook_delete().
+ * @param $nid
+ * @param $node_deletes
+ */
+function bulkdelete_node_delete_quick($nids, $node_deletes = array()) {
+  foreach ($nids as $nid) {
+    // Reset the static cache to keep memory down.
+    $node = node_load($nid, NULL, TRUE);
+
+    // Note that the user calling this has administer nodes privileges, and
+    // can thus delete without an access check.
+    // Call the node-specific callback (if any).
+    foreach ($node_deletes as $function) {
+      $function .= '_node_delete';
+      $function($node);
+    }
+
+    db_delete('node')->condition('nid', $node->nid)->execute();
+    db_delete('node_revision')->condition('nid', $node->nid)->execute();
+    if (module_exists('search')) {
+      search_reindex($node->nid, 'node');
+    }
+  }
+}
+
+/**
+ * The cache must not be cleared as the last batch operation,
+ * but after the batch is finished.
+ * This function is called by the batch 'finished' parameter.
+ * @param $success
+ * @param $results
+ * @param $operations
+ */
+function _bulkdelete_batch_finished($success, $results, $operations) {
+  cache_clear_all();
+  $message = $success ? t('Bulkdelete performed successfully.') : t('Bulkdelete has not been finished successfully.');
+  watchdog('bulkdelete', $message);
+  drupal_set_message($message);
+}

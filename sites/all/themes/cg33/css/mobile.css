@@ -1,0 +1,188 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+/* mobile */
+p img{ width:100% !important;}
+.page-sources #zone-content .block {background-color:#ed4624;color:#ffffff;padding:5px;margin:5px;}
+.page-thematiques #block-views-bonnepratiquesdujour-block-1,#block-block-11,.page-donnees #zone-content .block {background-color:#2eb34f;color:#ffffff;padding:5px;margin:5px;}
+.page-usages #zone-content  .block {background-color:#27b7ea;color:#ffffff;padding:5px;margin:5px;}
+.term35034{background-color:#2eb34f;margin:2%;padding:2%;}
+.term35035{background-color:#ed4624;margin:2%;padding:2%;}
+.term35033{background-color:#27b7ea;margin:2%;padding:2%;}
+
+
+.page-thematiques .region-contentsecondzoneleft .views-field.views-field-php-1{position:inherit;}
+.page-applications #block-multiblock-1,.page-applications .view-applicationslideshow{display:none;}
+.page-applications #region-sidebar-first .block{background-color:#27b7ea;color:#ffffff;padding:2%;margin:5px 0;}
+
+.node-type-idees #block-views-bonnepratiquesdujour-block-1,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2 ,
+.node-type-idees #block-views-bonnepratiquesdujour-block-3,
+.node-type-idees #block-views-bonnepratiquesdujour-block-4,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1,
+.node-type-reference #block-views-bonnepratiquesdujour-block-2 ,
+.node-type-reference #block-views-bonnepratiquesdujour-block-3,
+.node-type-reference #block-views-bonnepratiquesdujour-block-4,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2 ,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-3,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-4,
+
+.node-type-page #block-views-bonnepratiquesdujour-block-1,
+.node-type-page #block-views-bonnepratiquesdujour-block-2 ,
+.node-type-page #block-views-bonnepratiquesdujour-block-3,
+.node-type-page #block-views-bonnepratiquesdujour-block-4,
+.page-groupes  #region-contentbottomleft .block{background-color:#2eb34f;color:#ffffff;padding:2%;margin:5px 0;}
+.page-groupes   #region-contentbottomright .block{background-color:#2eb34f;color:#ffffff;padding:5px;margin:5px;}
+
+
+.node-type-idees #block-views-bonnepratiquesdujour-block-1  .views-field.views-field-php-1,
+.node-type-idees #block-views-bonnepratiquesdujour-block-2  .views-field.views-field-php-2,
+.node-type-reference #block-views-bonnepratiquesdujour-block-1  .views-field.views-field-php-1,
+.node-type-reference #block-views-bonnepratiquesdujour-block-2  .views-field.views-field-php-2,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-1  .views-field.views-field-php-1,
+.node-type-code-source #block-views-bonnepratiquesdujour-block-2  .views-field.views-field-php-2,
+.node-type-page #block-views-bonnepratiquesdujour-block-1  .views-field.views-field-php-1,
+.node-type-page #block-views-bonnepratiquesdujour-block-2  .views-field.views-field-php-2,
+.page-groupes .view-bonnepratiquesdujour.view-display-id-block_2 .views-field.views-field-php-2
+{position:inherit;}
+ .page-groupes   #region-contentbottomright .block#block-block-13{background-color:#27b7ea;} 
+ .page-groupes .region-contentbottomright #block-block-13 .inscrirelink{background-image:url('../images/narrow/lieninscrire.png');padding:1%;}
+.page-themes #region-contentsecondzoneleft,.page-themes #region-contentsecondzoneright{background-color:#2eb34f;color:#ffffff;padding:5px;margin:5px;}
+#region-menu .menu li a {
+    margin: 3px;
+    padding: 5px;
+    width: 90%;
+}
+#block-system-main-menu.block-system.contextual-links-region {margin-left:0;}
+#block-system-main-menu{margin:0;}
+#block-tagadelic-3{background-color:#fff56b;display:none;}
+#block-menu-menu-participez-{background-color:#00a651;display:none;}
+#block-views-derniersblogs-block{display:none;}
+/*
+#block-views-derniersblogs-block .views-row {
+    background-image: url("/cg33data/drupal/sites/all/themes/cg33/images/narrow/tagadelic_3.png");
+    height: 110px;
+    background-repeat:no-repeat;
+}*/
+th.views-field-field-rubrique-bp,td.views-field-field-rubrique-bp{display:none;}
+.page-bonnes-pratiques #region-sidebar-first .block{background-color:#ed4624;color:#ffffff;padding:2%;margin:5px 0;}
+select,input{width:80%;}
+.page-themes th.views-field-name,.page-themes td.views-field-name{display:none;}
+
+.page-themes .region-contentsecondzoneleft .views-field.views-field-php-1{position:inherit;}
+#block-views-groupes-block-2 .views-field-field-glocality ,#block-views-groupes-block-2 .views-field-php-1,#block-views-groupes-block-2 .views-field-php{display:none;}
+.page-donnees #zone-content .block#block-views-groupes-block-1{/*background-color:transparent;*/ background-color:#fff;}
+.page-donnees #zone-content .block#block-views-groupes-block-1 .block-title{color:#000;}
+
+/* menu page interne */
+ #block-multiblock-2{display:block;}
+.not-front #block-system-main-menu{display:none;}
+.front  #block-multiblock-2{display:none;}
+
+ #region-footer-first .block-multiblock .menu li{display:inline;}
+ #region-footer-first .block-multiblock .menu{ font-family:latoregular;}	
+ #region-footer-first .block-multiblock .menu li{margin:0;}
+ #region-footer-first .block-multiblock .menu li a {margin:1% 0;width:100%;background-color: #A57E49;border-radius: 5px 5px 5px 5px;-moz-border-radius:5px;display: inline-block;text-align: center;}
+ #region-footer-first .block-multiblock li a {color: #fff;text-decoration: none;margin-left:0;font-size:16px;}
+
+ #region-footer-first .block-multiblock .menu li .openzone {background-color:#27b7ea;}  
+ #region-footer-first .block-multiblock .menu li .blog{background-color:#eddd00;}    
+ #region-footer-first .block-multiblock .menu li .referentiel{background-color:#ed4624;}   
+ #region-footer-first .block-multiblock .menu li .catalogue{background-color:#2eb34f;}  
+ #region-footer-first .block-multiblock .menu li .contact{background-color:#b3b3b3;}
+ /* fin region menu */
+ 
+ 
+ /*---------app--search--------------------------*/
+ #block-ebiz-searchapplication input.form-submit{ left: 67%;}
+#block-views-blocksapplication-block-1 .view-content .views-row, #block-views-blocksapplication-block-2 .view-content .views-row {
+    background-position: -1px 9px;
+    font-size: 10px;
+    margin: 0 0 0 6px;
+}
+#block-views-blocksapplication-block-1 {
+    background-image: url("../images/bg_populaires_mob.png");
+}
+#block-views-blocksapplication-block-1 h2, #block-views-blocksapplication-block-2 h2{
+font-family: georgia;
+    font-size: 14px;
+    margin: 0 0 0 18px;
+}
+#block-views-blocksapplication-block-1 .view-content {
+    background-color: #F3F3F3;
+    float: left;
+    margin: 0 0 0 3.7%;
+    padding: 0.8% 0 0 0;
+    width: 81%;
+}
+#block-views-blocksapplication-block-1 .row{font-size:10px;}
+#block-views-blocksapplication-block-1 .feed-icon{ left: 78%;position: absolute; top: -1px;}
+#block-views-blocksapplication-block-2 .feed-icon{ left: 70%;position: absolute; top: -4px;}
+#block-views-blocksapplication-block-2 .block-inner {
+    background-color: #F3F3F3;
+    float: left;
+    margin: 0 0 5px 3%;
+    padding: 0 0 5%;
+    width: 81%;
+}
+/*--------footer--------------*/
+ #section-footer a{font-size:10px;}
+  #section-footer li{margin:0;}
+  
+  /* logo */
+#region-user-first #logo{width:100%;}
+.node-type-page #block-views-bonnepratiquesdujour-block-4 h2, .node-type-page #block-views-bonnepratiquesdujour-block-3 h2,
+.node-type-page #block-views-bonnepratiquesdujour-block-2 h2, .page-groupes .region-contentbottomleft .block h2
+{padding:0;}
+#region-postscript-first #block-search-form{display:none;}
+.node-type-page #block-multiblock-5 h2, body.page-bonnespratiques #block-multiblock-5 h2 {width:95%;margin: 19px 0 2%;}
+
+.node-type-page #block-multiblock-5 .view-bonnepratiquesdujour .view-content, body.page-bonnespratiques #block-multiblock-5 .view-bonnepratiquesdujour .view-content 
+{width:96%;}
+.node-type-page #block-multiblock-5 .view-bonnepratiquesdujour .view-content, body.page-bonnespratiques #block-multiblock-5 .view-bonnepratiquesdujour .view-content 
+{margin:0}
+#block-views-blocksapplication-block-1,#block-views-blocksapplication-block-2{display:none;}
+.view-groupes .views-field-field-gimage{display:none;}
+.page-thematiques .region-contentsecondzoneleft .block h2{padding:0}
+.node-type-code-source #block-multiblock-5 .view-bonnepratiquesdujour .view-content, .node-type-idees #block-multiblock-5 .view-bonnepratiquesdujour .view-content, .node-type-reference #block-multiblock-5 .view-bonnepratiquesdujour .view-content, .node-type-page #block-multiblock-5 .view-bonnepratiquesdujour .view-content, body.page-bonnespratiques #block-multiblock-5 .view-bonnepratiquesdujour .view-content{padding:2%;}
+.node-type-reference #block-views-bonnepratiquesdujour-block-1 h2, .node-type-idees #block-views-bonnepratiquesdujour-block-1 h2, .node-type-code-source #block-views-bonnepratiquesdujour-block-1 h2, .node-type-reference #block-views-bonnepratiquesdujour-block-4 h2, .node-type-idees #block-views-bonnepratiquesdujour-block-4 h2, .node-type-code-source #block-views-bonnepratiquesdujour-block-4 h2, .node-type-reference #block-views-bonnepratiquesdujour-block-3 h2, .node-type-idees #block-views-bonnepratiquesdujour-block-3 h2, .node-type-code-source #block-views-bonnepratiquesdujour-block-3 h2, .node-type-reference #block-views-bonnepratiquesdujour-block-2 h2, .node-type-idees #block-views-bonnepratiquesdujour-block-2 h2, .node-type-code-source #block-views-bonnepratiquesdujour-block-2 h2, .node-type-page #block-views-bonnepratiquesdujour-block-1 h2, .node-type-page #block-views-bonnepratiquesdujour-block-4 h2, .node-type-page #block-views-bonnepratiquesdujour-block-3 h2, .node-type-page #block-views-bonnepratiquesdujour-block-2 h2,
+ .page-groupes .region-contentbottomleft .block h2 {padding:0;}
+
+/*rr*/
+#zone-content-home-wrapper{display:none;visibility:hidden;}
+#region-user-second .search-form .container-inline,
+#region-user-second .search-form .container-inline .form-item-search-block-form{float:none;text-align:right;}
+
+
+#contentanimationrightnarrow,#contentanimationleftnarrow,#contentanimationcenternarrow{display:none;visibility:hidden;}
+#contentanimationcenter,#contentanimationleft,#contentanimationright{display:none;visibility:hidden;}
+h2.node-title {
+    font-size: 16px;
+    letter-spacing: 0;
+}
+.form-item-retain-filters input{width:auto;}
+.form-item-retain-filters{display:block;}
+.search-results article h2 a, .search-results li h3 a, .page-search .node-results li h3 a, .page-blog #block-multiblock-6 .node-blog h2.node-title a, .page-searchpackages #region-content #block-system-main .search-results .node-ckan-package h2.node-title a, .page-searchapplications #region-content #block-system-main .search-results .node-application h2.node-title a {
+      padding: 0 4%;
+}
+#block-views-mappackage-block-1 .views-field .views-label{padding:0}
+.logogironde a img{ width:90%;}
+#block-webform-client-block-16043,#block-webform-client-block-16882{
+position:static;}
+#block-webform-client-block-16043 .content,#block-webform-client-block-16882 .content{margin:5px 0 10px 30px;}
+#block-webform-client-block-16043 .content .content,#block-webform-client-block-16882 .content .content{margin:0;}
+#block-webform-client-block-16043 h2.block-title,#block-webform-client-block-16882 h2.block-title{position:static;}
+.view-departements .view-header{display:none;visibility:hidden;}
+.view-departements{paddin:4%;}
+#navs ul li{margin:16px 0;float:none;display:block;}
+#navs ul li.last a,#navs ul li.first a{border-radius:5px;}
+#contentdataviz{float:none;width:90%;margin-top:10px;margin:0 auto;}
+#block-multiblock-6 .desc{display:none;visibility:hidden;}
+.page-datavisualisation #block-multiblock-6 #navs{padding:4%;}
+.menu2{display:none;visibility:hidden;}
+.field-name-field-liendataviz{clear:both;width:auto;}
+
+.field-name-field-texte-avant-bouton {font-size:19px;width:auto;clear:both;}
+.node-type-page .field-name-body img{max-width:90%;}
+textarea, select, input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"],
+input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"]{width:80%;}

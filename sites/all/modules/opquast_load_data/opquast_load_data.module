@@ -1,0 +1,134 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function opquast_load_data_menu() {
+	$items = array();
+
+	$items['opquastimport'] = array(
+    'title' => '',
+    'description' => '',
+    'page callback' => '_opquast_load_data_list',
+   'access arguments' => array('access content'),
+    'page arguments' => array()
+	);
+
+	$items['admin/config/system/opquast_load_data'] = array(
+    'title' => 'Opquast',
+    'description' => 'Configure opquast',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('opquast_load_data_admin_settings_form'),
+    'access arguments' => array('administer Content'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'opquast_load_data.admin.inc',
+	);
+	return $items;
+}
+
+
+function _opquast_load_data_list () {
+	$output = _opquast_load_data_connect('http://checklists.opquast.com/api/checklists/589');
+	print_r($output);
+	foreach($output as $bnurl){
+		$out=_opquast_load_data_connect($bnurl->resource_uri);
+		//	print_r($out);
+		if(is_numeric( $out->number)){
+			_opquast_load_data_createnode_bn($out,$bnurl->resource_uri);}
+	}
+
+}
+
+
+function _opquast_load_data_connect($url) {
+	$ch = curl_init();
+
+	curl_setopt($ch, CURLOPT_URL,$url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1) ;
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json','Content-Type: application/json'));
+	$xml = curl_exec($ch);
+	$info = curl_getinfo($ch);
+	print_r($info);
+	curl_close($ch);
+	$xml=json_decode("$xml");
+	return $xml;
+
+}
+
+function  _opquast_load_data_createnode_bn($out,$url){
+	$nid=_opquast_load_data_checkbn($out->number);
+	if($nid)$node=node_load($nid);
+	// if package dont exist create a new one
+	else {
+		$node = new stdClass();
+		$node->uid=1;
+		$node->promote = 0;
+		$node->sticky = 0;
+		$node->type = "bonnepratique";
+		$node->language= LANGUAGE_NONE;
+		$node->created =strtotime($out->creation_date);
+		$node->status=1;
+	}
+
+	// common part for add andd edit  setting up the fields
+	//$node->uid = $uid;
+	$node->comment = 2;
+	//	field_priorite_bp /field_objectif_bp /field_solution_bp /field_control_bp/field_rubrique_bp/field_typebp/	field_id_opquast/
+	// field_vote /field_evaluation /	field_comment_opquast / body /title
+	if(isset($out->description))$node->title=(string)$out->description;
+
+	if(isset($out->priority))	$node->field_priorite_bp[LANGUAGE_NONE][0]['value']=$out->priority;
+	if(isset($out->goal))	{
+		$node->field_orbjectif_bp[LANGUAGE_NONE][0]['format']  = 'filtered_html';
+		$node->field_objectif_bp[LANGUAGE_NONE][0]['value']=$out->goal;
+	}
+	if(isset($out->solution))	{
+		$node->field_solution_bp[LANGUAGE_NONE][0]['value']=$out->solution;
+		$node->field_solution_bp[LANGUAGE_NONE][0]['format']  = 'filtered_html';
+	}
+
+	if(isset($out->control)){
+		$node->field_control_bp[LANGUAGE_NONE][0]['value']=$out->control;
+		$node->field_control_bp[LANGUAGE_NONE][0]['format']  = 'filtered_html';
+	}
+	if(isset($out->fields_extra->Rubrique['0']))	$node->	field_rubrique_bp[LANGUAGE_NONE][0]['value']=$out->fields_extra->Rubrique['0'];
+	if(isset($url))	$node->field_comment_opquast[LANGUAGE_NONE][0]['value']=$url;
+	if(isset($out->number))	$node->field_id_opquast[LANGUAGE_NONE][0]['value']=$out->number;
+
+
+	if(isset($out->fields_extra->categorie['0'])){
+		$tidf=key(taxonomy_term_load_multiple(array(), array('name' => $out->fields_extra->categorie['0'],'vid' => variable_get('opquast_tagsvocab'))));
+		if(!isset($tidf) && empty($tidf) && $out->fields_extra->categorie[0]!=''  )
+		$tidf=custom_create_taxonomy_term($out->fields_extra->categorie[0],variable_get('opquast_tagsvocab'));
+
+		$node->	field_typebp[LANGUAGE_NONE][0]['tid']=$tidf;
+		}
+
+//print_r($node);
+	$node=node_submit($node);
+	node_save($node);
+	db_update('node')->fields(array('changed' => time()))
+	->condition('nid',$node->nid, '=')
+	->execute();
+}
+
+function  _opquast_load_data_checkbn($id){
+	$query = db_select('field_data_field_id_opquast', 'r');
+	$query->join('node', 'n', 'n.nid = r.entity_id');
+	$query->fields('r', array('entity_id'))->condition('r.field_id_opquast_value', $id, '=');
+	$result = $query->execute();
+	$nidres=key($result->fetchAllAssoc('entity_id'));
+	return $nidres;
+}
+function custom_create_taxonomy_term($name, $vid) {
+	$term = new stdClass();
+	$term->name = $name;
+	$term->vid = $vid;
+	taxonomy_term_save($term);
+	return $term->tid;
+}
+
+function opquast_load_data_cron(){
+_opquast_load_data_list();
+}
+?>

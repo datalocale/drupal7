@@ -1,0 +1,5 @@
+name=opquast load data
+description= les modules d'ebiz
+package=ebiz
+core="7.x"
+version="7.x"

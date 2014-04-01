@@ -1,0 +1,62 @@
+<?php
+
+/*
+ * @file
+ * Drupal Module: Twitter pull admin
+ * Adds the required Javascript to the bottom of all your Drupal pages
+ * to allow tracking by the Google Analytics statistics package.
+ *
+ * @author: Alexander Hass <http://drupal.org/user/85918>
+ */
+
+
+/*
+function twitterpulladmin_permission() {
+  return array(
+    'administer twitter pull' => array(
+      'title' => t('Administer Twitter pull account'),
+      'description' => t('Administer Twitter pull account'),
+    )
+  );
+}*/
+
+/**
+ * Implements hook_menu().
+ */
+/*function twitterpulladmin_menu() {
+  $items['admin/config/system/twitterpulladmin'] = array(
+    'title' => 'Twitter pull',
+    'description' => 'Configure the twitter account',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('twitterpulladmin_admin_settings_form'),
+    'access arguments' => array('administer twitter pull'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'twitterpulladmin.admin.inc',
+  );
+
+  return $items;
+}*/
+
+function twitterpulladmin_block_info() {
+  $blocks['twitter'] = array(
+    'info' => t('Twitter'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+function twitterpulladmin_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'twitter':
+      $block['subject'] = t('Twitter block');
+      $block['content'] ='<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/datalocale"  data-widget-id="346607467721011200">Tweets by @datalocale</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+      // twitter_pull_render('@'.variable_get('twitterpulladmin_account'), variable_get('twitterpulladmin_title'), variable_get('twitterpulladmin_nb'));
+      break;
+  }
+  return $block;
+}

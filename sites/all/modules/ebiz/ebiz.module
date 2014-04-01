@@ -1,0 +1,381 @@
+<?php
+//echo drupal_get_form("apachesolr_search_custom_page_search_form");
+function ebiz_form_alter(&$form, &$form_state, $form_id) {
+	//echo $form_id;
+	global $user;
+	//echo $form['#id'];
+	//print_r($form_state);
+	if($form_id=="application_node_form" || $form_id=="idees_node_form"){
+		$form['field_createur']['und'][0]['value']['#default_value']=$user->name;
+		//$form['field_contactemail']['und'][0]['email']['#default_value']=$user->mail;
+	}
+}
+
+function ebiz_init(){
+	$path = drupal_get_path('module', 'ebiz');
+	drupal_add_js($path . '/pathscript.js');
+drupal_add_js($path . '/animation.js');
+drupal_add_css($path . '/ebiz.css');
+$pt=libraries_get_path("jquery.cycle");
+drupal_add_js($pt . '/jquery.cycle.all.js');
+if(arg(0)=="user" &&arg(1)=="register")drupal_goto("http://catalogue.datalocale.fr/user/register");
+
+
+}
+
+
+function ebiz_node_presave($node) {
+	if($node->type=="application"){
+
+		if($node->field_jeux[LANGUAGE_NONE]){
+			foreach($node->field_tagsckan[LANGUAGE_NONE] as $tgapp)$arrtags[]['tid']=$tgapp['tid'];
+			foreach($node->field_jeux[LANGUAGE_NONE] as $jeu){
+				$ndpackage=node_load($jeu['nid']);
+				if($ndpackage->field_tagsckan)foreach($ndpackage->field_tagsckan[LANGUAGE_NONE] as $tg)
+				$arrtags[]['tid']=$tg['tid'];
+				$node->field_tagsckan[LANGUAGE_NONE]=$arrtags;
+			}
+		}
+	}
+		if($node->type=="application" || $node->type=="idees" ){
+		if($node->field_forum[LANGUAGE_NONE][0]['value']==1 && (!$node->field_forumnid[LANGUAGE_NONE] || $node->field_forumnid[LANGUAGE_NONE][0]['nid']=='') )
+		{
+		$nd = new stdClass();
+    global $user;$uid=$user->uid;
+		$nd->promote = 0;
+		$nd->sticky = 0;
+		$nd->comment = 2;
+		$nd->type = "forum";
+		$nd->language= LANGUAGE_NONE;
+		$nd->uid = $uid;
+	$nd->status =1;
+	$nd->title = "Forum de ".$node->title;
+	if($node->type=="application")$tid=35655;elseif($node->type=="idees")$tid=35656;
+	$nd->taxonomy_forums[LANGUAGE_NONE][0]['tid'] = $tid;
+	node_save($nd);
+	$node->field_forumnid[LANGUAGE_NONE][0]['nid']=$nd->nid;
+		}
+	}
+
+
+}
+function ebiz_searchapplicationform($form, &$form_state) {
+	$form['keys'] = array(
+    '#type' => 'textfield',
+    '#title' => check_plain(t("Search")),
+    '#required' => TRUE,
+
+	);
+
+	$form['Search'] = array(
+    '#type' => 'submit',
+    '#title' => t('Submit'),
+  '#value' =>'submit'
+
+  );
+
+  return $form;
+}
+function ebiz_searchapplicationform_submit($form, &$form_state) {
+	//print_r($form_state);break;
+	drupal_goto("/searchapplications/".$form_state['values']['keys']);
+
+
+}
+function ebiz_contactergroupeform($form, &$form_state) {
+	$output=views_embed_view("groupechamp","default",arg(1));
+	$nd=node_load(arg(1));
+		if(isset($nd->field_gemail['und'])){
+	$email=$nd->field_gemail['und'][0]['email'];
+
+	if($email){
+	$form['to'] = array(
+    '#type' => 'hidden',
+	'#default_value'=>$email,
+
+	);}
+		$form['contact'] = array(
+    '#type' => 'submit',
+    '#title' => t('Submit'),
+  '#value' =>'contact'
+
+  );
+		  $form['#action'] = url('node/12982');
+		}
+  $form['desc'] = array(
+'#type' => 'item',
+  '#description' =>$output
+
+  );
+
+
+
+
+  return $form;
+
+
+}
+
+function ebiz_node_view($node, $view_mode) {
+	global $node_comments;
+
+	// Store node comments in global variable so we can put them in a block.
+	if ($node->type == 'ckan_package' && isset($node->content['comments'])) {
+		$node_comments = $node->content['comments'];
+	}
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ebiz_block_info() {
+	$blocks['searchapplication'] = array(
+    'info' => t('searchapplication'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['note_comments'] = array(
+    'info' => t('Package Comments'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['contactergroupe'] = array(
+    'info' => t('Contacter groupe'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['bonnespratiques'] = array(
+    'info' => t('bonnespratiques'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['animation'] = array(
+    'info' => t('animation home page'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['animationleft'] = array(
+    'info' => t('animation left home page'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['animationright'] = array(
+    'info' => t('animation right home page'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['ckanapi'] = array(
+    'info' => t('Ckan api'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['contactuser'] = array(
+    'info' => t('Contact user'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['rsspackages'] = array(
+    'info' => t('Rss packages'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	$blocks['rssblog'] = array(
+    'info' => t('Rss blog'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+		$blocks['logos'] = array(
+    'info' => t('Logos'),
+    'cache' => DRUPAL_NO_CACHE,
+	);
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ebiz_block_view($delta=''){
+	global $user;
+	global $node_comments;
+	global $base_path;
+	$pt=$base_path."misc/feed.png";
+	$block = array();
+
+	switch($delta){
+		case 'searchapplication':
+			$block['subject'] = 'searchapplicationform';
+			$block['content'] = drupal_get_form("ebiz_searchapplicationform");
+			break;
+		case 'contactergroupe':
+			$diffuseur=0;
+			if(is_numeric(arg(1))){
+				$nd=node_load(arg(1));
+				if(isset($nd->field_type))if($nd->field_type['und'][0]['value']=="organization") $diffuseur=1;}
+				if($nd->type=="groupe"&& $diffuseur==1)
+				$block['subject'] = 'Contacter ce diffuseur';
+				else $block['subject'] = 'Contacter ce producteur';
+				$block['content'] = drupal_get_form("ebiz_contactergroupeform");
+				break;
+		case 'bonnespratiques':
+			$block['subject'] = 'bonnespratiques';
+			$block['content'] = getrubriques();
+			break;
+		case 'contactuser':
+			$nd=node_load(arg(1));$uid=$nd->uid;
+			$block['subject'] = 'Contact user';
+			$block['content'] = l(t("contacter "),"user/".$uid."/contact");
+			break;
+		case 'note_comments':
+			// Get the active menu object.
+			if ($node = menu_get_object()) {
+				// Make sure user is viewing a note.
+				if ($node->type == 'ckan_package') {
+					$block['content'] = '';
+					// Set the title of the block.
+					$block['subject'] = NULL;
+					// Render the comments and comment form (access checks, etc. are done
+					// by comment_node_page_additions()).
+					$block['content'] .= drupal_render($node_comments);
+				}
+			}
+			break;
+		case 'animation':
+			$block['subject'] = 'animation home';
+			$block['content'] = theme("animation");
+			break;
+		case 'animationleft':
+			$block['subject'] = 'animation left home';
+			$block['content'] = theme("animationleft");
+			break;
+		case 'animationright':
+			$block['subject'] = 'animation right home';
+			$block['content'] = theme("animationright");
+			break;
+		case 'ckanapi':
+			$block['subject'] = 'ckanapi';
+			$block['content'] = theme("ckanapi");
+			break;
+		case 'rsspackages':
+
+			$block['subject'] = '';
+			$block['content'] = l("<img src='".$pt."' />","rssjeux", $options = array('html' => TRUE));
+			break;
+		case 'rssblog':
+			$block['subject'] = '';
+			$block['content'] = l("<img src='".$pt."' />","actus/feed", $options = array('html' => TRUE));
+			break;
+		case 'logos':
+				  global $base_path;
+		/*$src = $base_path.'sites/all/themes/cg33/images/logo_lacub.png';
+    $img = '<img src="'.$src.'" />';
+    $path =  "http://www.gironde.fr";*/
+    	$src2 = $base_path.'sites/all/themes/cg33/images/logo_cr_aquitaine.png';
+    $img2 = '<img src="'.$src2.'" />';
+    $path2 =  "http://aquitaine.fr";
+    	$src3 = $base_path.'sites/all/themes/cg33/images/girondequadri.jpg';
+    $img3 = '<img src="'.$src3.'" />';
+    $path3 =  "http://www.gironde.fr";
+   // $items[]=l($img,$path, array('attributes' => array('class' =>'link-image'),'html' => true));
+     $items[]=l($img3,$path3, array('attributes' => array('class' =>'link-image'),'html' => true));
+     $items[]=l($img2,$path2, array('attributes' => array('class' =>'link-image'),'html' => true));
+			$block['subject'] = '';
+			$block['content'] = '<div class="logos">'.theme('item_list',array('items' => $items)).'</div>';
+			break;
+
+	}
+
+
+	return $block;
+}
+
+function ebiz_theme($existing, $type, $theme, $path) {
+  return array(
+    'animation' => array(
+      'template' => 'animation',
+    ),
+
+       'animationleft' => array(
+      'template' => 'animationleft',
+    ),
+          'animationright' => array(
+      'template' => 'animationright',
+    ),
+   'ckanapi' => array(
+      'template' => 'ckanapi',
+    ),
+
+  );
+}
+
+function getrubriques(){
+	$output='';
+	$terms=taxonomy_get_tree(14);
+	foreach($terms as $trm)
+	$output.= "<div class='term".$trm->tid."'>".$trm->name.views_embed_view("bonne_pratique","page_1",$trm->tid)."</div>";
+	return $output;
+}
+
+/**
+ *
+ *
+ * hook_menu
+ *
+ *
+ */
+
+function ebiz_menu(){
+	$items = array();
+
+		$items['usages'] = array(
+    'page callback'   => 'ebiz_page',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+	);
+		$items['sources'] = array(
+    'page callback'   => 'ebiz_page',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+	);
+$items['donnees'] = array(
+    'page callback'   => 'ebiz_page',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+	);
+$items['thematiques'] = array(
+    'page callback'   => 'ebiz_page',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+	);
+	$items['groupes'] = array(
+    'page callback'   => 'ebiz_page',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+	);
+		$items['bonnespratiques'] = array(
+    'page callback'   => 'ebiz_page',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+	);
+			$items['ckanapi'] = array(
+    'page callback'   => 'ebiz_ckan',
+    'access arguments' => array('access content'),
+    'type'            => MENU_CALLBACK,
+
+	);
+	return $items;
+}
+
+function ebiz_page(){
+	return '';
+}
+
+function ebiz_ckan(){
+echo   theme("ckanapi");
+}
+
+function getpath($src){
+global $base_path;
+global $language;
+$lang=$language->language;
+
+$path=drupal_get_path_alias($src, $lang);
+ return $base_path.$path;
+}
+
+
+
