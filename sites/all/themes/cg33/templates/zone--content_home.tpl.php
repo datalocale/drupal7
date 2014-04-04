@@ -1,4 +1,4 @@
-<? echo $is_front."test";if($is_front){?>
+<? echo $is_front."test";break;if($is_front){?>
 <?php if ($wrapper): ?><div<?php print $attributes; ?>><?php endif; ?>
   <div<?php print $content_attributes; ?>>
     <?php /*if ($breadcrumb): ?>
