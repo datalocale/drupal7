@@ -1,4 +1,4 @@
-<? echo $is_front;break; if(!$is_front){?>
+<?php if(!$is_front){?>
 <?php if ($wrapper): ?><div<?php print $attributes; ?>><?php endif; ?>
   <div<?php print $content_attributes; ?>>
  <?php
@@ -19,7 +19,7 @@
     <?php print $content; ?>
   </div>
 <?php if ($wrapper): ?></div><?php endif; ?>
-<? }?>
+<?php }?>
 <script>
 (function($) {
 	$(document).ready(function(){
