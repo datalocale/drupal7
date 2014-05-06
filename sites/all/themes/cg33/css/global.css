@@ -506,12 +506,13 @@ display: block;float: left;font-weight: normal;margin: 19px 0 2% 2%;padding: 4% 
 .node-type-page #block-multiblock-5 .views-field-field-solution-bp,body.page-bonnespratiques #block-multiblock-5 .view-bonnepratiquesdujour .views-field-field-solution-bp
 {background-color: white;margin: 3% 0;min-height: 74px;width: 90%; padding:5%;}
 
-.page-datavizs  .content ,.node-type-page .content article .content,.node-type-dataviz article .content,.node-type-blog .node-blog .content,.node-type-page #block-multiblock-6,.node-groupe ,.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,.node-type-webform .content article .content, .node-type-code-source  .content article .content ,.node-type-reference .content article .content,.node-type-idees .content article .content,.node-application .content,.node-bonnepratique .content,.page-contact #region-content,#comments,
+.page-datavizs  #block-system-main .content ,.node-type-page .content article .content,.node-type-dataviz article .content,.node-type-blog .node-blog .content,.node-type-page #block-multiblock-6,.node-groupe ,.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,.node-type-webform .content article .content, .node-type-code-source  .content article .content ,.node-type-reference .content article .content,.node-type-idees .content article .content,.node-application .content,.node-bonnepratique .content,.page-contact #region-content,#comments,
 .page-groupepackages .region-content  #block-system-main .view-block-packagespergroupeou-bien-per-service .view-content,
 article.node-blog{background-color:#ffffff;border:solid 1px #d9d9d9;} 
-.page-datavizs  .view-datavizs .views-row{clear:both;margin:20px 0;}
+.page-datavizs  .view-datavizs .views-row{  border-bottom: 1px solid #999999;clear: both;margin: 20px 0;min-height: 100px;}
 .page-datavizs  .view-datavizs .views-row .views-field.views-field-field-vignette{width:12%;float:left;}
-.page-datavizs  .content ,.node-type-page .content article .content,.node-type-dataviz article .content,.node-type-blog .node-blog .content,.node-type-page #block-multiblock-6,.node-groupe ,.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,.node-type-webform .content article .content, .node-type-code-source  .content article .content ,.node-type-reference .content article .content,.node-type-idees .content article .content,.node-application .content,.node-bonnepratique .content,.page-contact #region-content .content,
+.page-datavizs  .view-datavizs .views-row a.boutonpagerecherche{float:left;}
+.page-datavizs  #block-system-main .content ,.node-type-page .content article .content,.node-type-dataviz article .content,.node-type-blog .node-blog .content,.node-type-page #block-multiblock-6,.node-groupe ,.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,.node-type-webform .content article .content, .node-type-code-source  .content article .content ,.node-type-reference .content article .content,.node-type-idees .content article .content,.node-application .content,.node-bonnepratique .content,.page-contact #region-content .content,
 .page-groupepackages .region-content  #block-system-main .view-block-packagespergroupeou-bien-per-service .view-content,
 article.node-blog{padding:3%;}
 #comments {padding:15px;}
