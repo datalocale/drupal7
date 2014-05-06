@@ -1,4 +1,4 @@
-<?php print $doctype;global $base_path; echo arg(0); ?>
+<?php print $doctype;global $base_path;  ?>
 <html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"<?php print $rdf->version . $rdf->namespaces; ?>>
 <head<?php print $rdf->profile; ?>>
   <?php print $head; ?>
