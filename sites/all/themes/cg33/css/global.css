@@ -506,14 +506,18 @@ display: block;float: left;font-weight: normal;margin: 19px 0 2% 2%;padding: 4% 
 .node-type-page #block-multiblock-5 .views-field-field-solution-bp,body.page-bonnespratiques #block-multiblock-5 .view-bonnepratiquesdujour .views-field-field-solution-bp
 {background-color: white;margin: 3% 0;min-height: 74px;width: 90%; padding:5%;}
 
-.page-datavizs  #block-system-main .content ,.node-type-page .content article .content,.node-type-dataviz article .content,.node-type-blog .node-blog .content,.node-type-page #block-multiblock-6,.node-groupe ,.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,.node-type-webform .content article .content, .node-type-code-source  .content article .content ,.node-type-reference .content article .content,.node-type-idees .content article .content,.node-application .content,.node-bonnepratique .content,.page-contact #region-content,#comments,
-.page-groupepackages .region-content  #block-system-main .view-block-packagespergroupeou-bien-per-service .view-content,
-article.node-blog{background-color:#ffffff;border:solid 1px #d9d9d9;} 
-.page-datavizs  .view-datavizs .views-row{  border-bottom: 1px solid #999999;clear: both;margin: 20px 0;min-height: 100px;}
-.page-datavizs  .view-datavizs .views-row .views-field.views-field-field-vignette{width:12%;float:left;}
-.page-datavizs  .view-datavizs .views-row a.boutonpagerecherche{float:left;}
-.page-datavizs  #block-system-main .content ,.node-type-page .content article .content,.node-type-dataviz article .content,.node-type-blog .node-blog .content,.node-type-page #block-multiblock-6,.node-groupe ,.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,.node-type-webform .content article .content, .node-type-code-source  .content article .content ,.node-type-reference .content article .content,.node-type-idees .content article .content,.node-application .content,.node-bonnepratique .content,.page-contact #region-content .content,
-.page-groupepackages .region-content  #block-system-main .view-block-packagespergroupeou-bien-per-service .view-content,
+.node-type-blog .node-blog .content,
+.node-type-page #block-multiblock-6,
+.node-groupe,
+.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,
+.node-type-webform .content article .content,
+.node-type-code-source .content article .content,
+.node-type-reference .content article .content,
+.node-type-idees .content article .content,
+.node-application .content,
+.node-bonnepratique .content,
+.page-contact #region-content .content,
+.page-groupepackages .region-content #block-system-main .view-block-packagespergroupeou-bien-per-service .view-content,
 article.node-blog{padding:3%;}
 #comments {padding:15px;}
 .term35034{float:left;}
@@ -768,3 +772,26 @@ a.thumb area{cursor:hand;}
 #region-user-second .logos img{width:100%;}
 .breadcrumb {margin-left: 2%;padding: 0.5em 0;}
 nav.links.node-links{margin: 1% 0;}
+
+/*dataviz*/
+.page-datavizs  #block-system-main .content ,.node-type-page .content article .content,.node-type-dataviz article .content,.node-type-blog .node-blog .content,.node-type-page #block-multiblock-6,.node-groupe ,.view-block-packagespergroupeou-bien-per-service.view-display-id-page_2,.node-type-webform .content article .content, .node-type-code-source  .content article .content ,.node-type-reference .content article .content,.node-type-idees .content article .content,.node-application .content,.node-bonnepratique .content,.page-contact #region-content,#comments,
+.page-groupepackages .region-content  #block-system-main .view-block-packagespergroupeou-bien-per-service .view-content,
+article.node-blog{background-color:#ffffff;border:solid 1px #d9d9d9;} 
+.page-datavizs  .view-datavizs .views-row{margin:1.375em auto;height:301px;width:250px;display:block;float:none;
+position:relative;overflow:hidden;}
+.page-datavizs  .view-datavizs .views-row img{max-width:100%;height:auto;}
+.page-datavizs  #block-system-main .content ,.node-type-page .content article .content,
+.node-type-dataviz article .content{padding:1.5em;}
+
+.page-datavizs .view-datavizs .views-field.views-field-body{position:absolute;left:0;
+display:block;height:301px;width:250px;color:#fff;font-size:12px;bottom:-301px;top:auto;text-align:center;
+background-image:url(../images/bg_images.png);background-repeat:repeat;background-position:0 0;}
+.page-datavizs .view-datavizs .views-field.views-field-body .title{margin:0;font-weight:bold;font-size:14px;}
+.page-datavizs .view-datavizs .views-field.views-field-body .dataviz_txt{margin:2em 0;}
+.page-datavizs .view-datavizs .views-field.views-field-body .field-content{margin:0 auto;position: relative;top: 26%;width: 90%;}
+.page-datavizs .view-datavizs a.boutonpagerecherche,
+.page-datavizs .view-datavizs a.boutonpagerecherche:hover{display:block;float:none;font-size:17px;line-height:1;
+margin:1em auto;padding:0.4em;width: 45%;}
+
+.page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{font-size:14px;font-weight:bold;text-align:left;
+background-image:url(../images/bg_images2.png);padding:1em;position:absolute;bottom:0;width:311px;left:0;color:#fff;min-height:50px;}

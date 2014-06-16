@@ -153,3 +153,9 @@ ul.animation li a {
 
 .field-name-field-texte-avant-bouton {width:auto;clear:both;}
 #region-user-first a {margin-left: 28%;}
+
+
+/*DATAVIZ*/
+.page-datavizs  .view-datavizs .views-row{margin:1.375em;height:313px;width:260px;}
+.page-datavizs .view-datavizs .views-row .views-field.views-field-body{height:313px;width:260px;bottom:-313px;}
+.page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{width:232px;}

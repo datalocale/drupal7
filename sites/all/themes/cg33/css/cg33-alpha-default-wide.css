@@ -147,3 +147,8 @@ ul.animation li a {   color: #000000;
 #region-user-second .search-form{margin:4% 0;}
 #region-user-first a {margin-left: 28%;}
 .breadcrumb {margin-left: 1%;}
+
+/*DATAVIZ*/
+.page-datavizs  .view-datavizs .views-row{margin:1.375em;height:408px;width:339px;}
+.page-datavizs .view-datavizs .views-row .views-field.views-field-body{height:408px;width:339px;bottom:-408px;}
+.page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{width:311px;}
