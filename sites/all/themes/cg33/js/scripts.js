@@ -2,6 +2,7 @@ jQuery(document).ready(function($) {
 	if($('.page-datavizs .view-datavizs').length > 0){
 		//$('.page-datavizs .view-datavizs .views-row').toggleClass('show');
 		$('.page-datavizs .view-datavizs .views-row').hover(function(){
+		  alert("tessst");
 				var theBody = $(this).children('.views-field-body');
 				var txt_height = theBody.height()
 				
