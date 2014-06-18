@@ -809,7 +809,8 @@ display:block;height:301px;width:250px;color:#fff;font-size:12px;bottom:-301px;t
 background-image:url(../images/bg_images.png);background-repeat:repeat;background-position:0 0;}
 .page-datavizs .view-datavizs .views-field.views-field-nid .title a,
 .page-datavizs .view-datavizs .views-field-title-1 a{margin:0;font-weight:bold;font-size:14px;color:#fff;}
-.page-datavizs .view-datavizs .views-field.views-field-nid .dataviz_txt{margin:2em auto;width:85%;}
+.page-datavizs .view-datavizs .views-field.views-field-nid .dataviz_txt,
+.page-datavizs .view-datavizs .views-field.views-field-nid .field-content .title{margin:2em auto;width:85%;}
 .page-datavizs .view-datavizs .views-field.views-field-nid .field-content{margin:0 auto;position: relative;top: 12%;width: 90%;}
 .page-datavizs .view-datavizs a.boutonpagerecherche{display:block;float:none;font-size:17px;line-height:1;
 margin:1em auto;padding:0.4em;width: 45%;border:solid 1px #15c3f4;}
@@ -838,3 +839,5 @@ background-image:url(../images/bg_images2.png);padding:1em;position:absolute;bot
 #views-exposed-form-datavizs-page{display:block;height:40px;clear:both;}
 #views-exposed-form-datavizs-page .views-exposed-form{margin:0 auto;}
 #views-exposed-form-datavizs-page #edit-combine-wrapper{padding:0;margin:0;float:none;}
+
+label[for="edit-combine"], .views-submit-button{display:none;visibility:hidden;}

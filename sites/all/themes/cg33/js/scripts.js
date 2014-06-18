@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	if($('.page-datavizs .view-datavizs').length > 0){
-		
+	
 		$('.page-datavizs .view-datavizs .views-row:nth-child(3n+2)').addClass('centered');
 		
 		$('.page-datavizs .view-datavizs .views-row').hover(function(){
@@ -31,7 +31,6 @@ jQuery(document).ready(function($) {
 		
 		if($('#edit-combine').length >0){
 			/*$('#edit-combine').attr('title', $('label[for="edit-combine"]').text()).labelify({text:'Rechercher'});*/
-			$('label[for="edit-combine"]').hide();
 			$('input#edit-combine').val('Rechercher');
 			$('input#edit-combine').focus(function(){
 				if($('input#edit-combine').val() == 'Rechercher'){
@@ -41,10 +40,10 @@ jQuery(document).ready(function($) {
 			$('input#edit-combine').blur(function(){
 				if($('input#edit-combine').val() == ''){
 					$('input#edit-combine').val('Rechercher');
+				}else{
+					$("#edit-submit-datavizs").click();
 				}
 			});
-			
-			
 		}
 		
 	}
