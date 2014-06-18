@@ -50,3 +50,5 @@ h2.block-title {font-size: 22px;}
 #views-exposed-form-datavizs-page .views-exposed-form{float:right;}
 .node-type-dataviz article .content{padding:1.5em 3em;}
 #block-views-blocksapplication-block-2 .block-inner {background-color: #F3F3F3;float: left;width: 78%;}
+
+.page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{padding:1em;}

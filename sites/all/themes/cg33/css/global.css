@@ -811,13 +811,13 @@ background-image:url(../images/bg_images.png);background-repeat:repeat;backgroun
 .page-datavizs .view-datavizs .views-field-title-1 a{margin:0;font-weight:bold;font-size:14px;color:#fff;}
 .page-datavizs .view-datavizs .views-field.views-field-nid .dataviz_txt,
 .page-datavizs .view-datavizs .views-field.views-field-nid .field-content .title{margin:2em auto;width:85%;}
-.page-datavizs .view-datavizs .views-field.views-field-nid .field-content{margin:0 auto;position: relative;top: 12%;width: 90%;}
+.page-datavizs .view-datavizs .views-field.views-field-nid .field-content{margin:0 auto;position: relative;top: 2%;width: 90%;}
 .page-datavizs .view-datavizs a.boutonpagerecherche{display:block;float:none;font-size:17px;line-height:1;
 margin:1em auto;padding:0.4em;width: 45%;border:solid 1px #15c3f4;}
 .page-datavizs .view-datavizs a.boutonpagerecherche:hover{background-color:#fff;border:solid 1px #15c3f4;color:#15c3f4;}
 
 .page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{font-size:14px;font-weight:bold;text-align:left;
-background-image:url(../images/bg_images2.png);padding:1em;position:absolute;bottom:0;width:311px;left:0;color:#fff;min-height:50px;}
+background-image:url(../images/bg_images2.png);padding:4%;position:absolute;bottom:0;width:92%;left:0;color:#fff;min-height:50px;}
 
 .page-datavizs ul.pager{background-color:transparent;border:0;width:200px;margin:0 auto;}
 .page-datavizs .item-list .pager li{border:0;font-size:15px;}
