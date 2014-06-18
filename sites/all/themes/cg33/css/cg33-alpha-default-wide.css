@@ -149,6 +149,7 @@ ul.animation li a {   color: #000000;
 .breadcrumb {margin-left: 1%;}
 
 /*DATAVIZ*/
-.page-datavizs  .view-datavizs .views-row{margin:1.375em;height:408px;width:339px;}
-.page-datavizs .view-datavizs .views-row .views-field.views-field-body{height:408px;width:339px;bottom:-408px;}
-.page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{width:311px;}
+.page-datavizs  .view-datavizs .views-row{margin:1.375em 0;height:361px;width:300px;}
+.page-datavizs  .view-datavizs .views-row.centered{margin:1.375em 8.4em;}
+.page-datavizs .view-datavizs .views-row .views-field.views-field-nid{height:361px;width:300px;bottom:-361px;}
+.page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{width:272px;}

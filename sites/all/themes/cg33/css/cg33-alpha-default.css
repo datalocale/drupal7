@@ -46,7 +46,7 @@ h2.block-title {font-size: 22px;}
 #block-views-blocksapplication-block-1 .feed-icon {left: 77%;position: absolute;top: 2.4%; }
 #block-views-blocksapplication-block-2 .feed-icon{left: 27%;position: absolute;top: 1.5%;}
 
-
-
-
+#views-exposed-form-datavizs-page #edit-combine-wrapper,
+#views-exposed-form-datavizs-page .views-exposed-form{float:right;}
+.node-type-dataviz article .content{padding:1.5em 3em;}
 #block-views-blocksapplication-block-2 .block-inner {background-color: #F3F3F3;float: left;width: 78%;}

@@ -1,9 +1,10 @@
 jQuery(document).ready(function($) {
 	if($('.page-datavizs .view-datavizs').length > 0){
-		//$('.page-datavizs .view-datavizs .views-row').toggleClass('show');
+		
+		$('.page-datavizs .view-datavizs .views-row:nth-child(3n+2)').addClass('centered');
+		
 		$('.page-datavizs .view-datavizs .views-row').hover(function(){
-		  //alert("tessst");
-				var theBody = $(this).children('.views-field-body');
+				var theBody = $(this).children('.views-field-nid');
 				var txt_height = theBody.height()
 				
 				theBody.animate({bottom: '-'+txt_height+'px'}, 100, function() {
@@ -17,7 +18,7 @@ jQuery(document).ready(function($) {
 				
 			},
 		function(){
-				var theBody = $(this).children('.views-field-body');
+				var theBody = $(this).children('.views-field-nid');
 				var txt_height = theBody.height()
 				theBody.animate({bottom: 0}, 'fast', function() {
 					$(this).stop().animate({bottom: '-'+txt_height+'px'});
@@ -27,5 +28,24 @@ jQuery(document).ready(function($) {
 					$(this).stop().animate({bottom: 0});
 				});
 		});
+		
+		if($('#edit-combine').length >0){
+			/*$('#edit-combine').attr('title', $('label[for="edit-combine"]').text()).labelify({text:'Rechercher'});*/
+			$('label[for="edit-combine"]').hide();
+			$('input#edit-combine').val('Rechercher');
+			$('input#edit-combine').focus(function(){
+				if($('input#edit-combine').val() == 'Rechercher'){
+					$('input#edit-combine').val('');
+				}
+			});
+			$('input#edit-combine').blur(function(){
+				if($('input#edit-combine').val() == ''){
+					$('input#edit-combine').val('Rechercher');
+				}
+			});
+			
+			
+		}
+		
 	}
 });

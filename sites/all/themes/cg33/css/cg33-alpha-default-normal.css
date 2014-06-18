@@ -156,6 +156,10 @@ ul.animation li a {
 
 
 /*DATAVIZ*/
-.page-datavizs  .view-datavizs .views-row{margin:1.375em;height:313px;width:260px;}
-.page-datavizs .view-datavizs .views-row .views-field.views-field-body{height:313px;width:260px;bottom:-313px;}
+.page-datavizs  .view-datavizs .views-row{margin:1.375em 0;height:313px;width:260px;}
+.page-datavizs  .view-datavizs .views-row.views-row-odd{margin-right:0;}
+.page-datavizs  .view-datavizs .views-row.views-row-even{margin-left:0;}
+.page-datavizs  .view-datavizs .views-row.centered{margin:1.375em 4.1em;}
+
+.page-datavizs .view-datavizs .views-row .views-field.views-field-nid{height:313px;width:260px;bottom:-313px;}
 .page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{width:232px;}

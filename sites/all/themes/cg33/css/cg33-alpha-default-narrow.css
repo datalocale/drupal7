@@ -168,6 +168,9 @@ ul.animation li{width:73px;height:84px;}
 
 
 /*DATAVIZ*/
-.page-datavizs  .view-datavizs .views-row{margin:1.375em;height:368px;width:306px;float:left;}
-.page-datavizs .view-datavizs .views-row .views-field.views-field-body{height:368px;width:306px;bottom:-368px;}
+.page-datavizs .view-datavizs .views-row{margin:1.375em 0;height:368px;width:306px;float:left;}
+.page-datavizs  .view-datavizs .views-row.centered{margin:1.375em 0;}
+.page-datavizs  .view-datavizs .views-row.views-row-odd{margin-right:2.7em;}
+.page-datavizs  .view-datavizs .views-row.views-row-even{margin-left:2.7em;}
+.page-datavizs .view-datavizs .views-row .views-field.views-field-nid{height:368px;width:306px;bottom:-368px;}
 .page-datavizs .view-datavizs .views-row .views-field.views-field-title-1{width:278px;}
